@@ -6,3 +6,10 @@
 .cont-leftdrawer-root .MuiListItemIcon-root {
     min-width: 32px;
 }
+
+.cont-layout-root .cont-layout-rightarea {
+    padding: 4rem 2rem 2rem 12rem;
+    height: calc(100vh - 6rem);
+    background: #212121;
+    overflow: scroll;
+}

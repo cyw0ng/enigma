@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../../containers/layout/Layout'
 import Config from './config'
+import FrontPage from '../frontPage/index'
 
 export default class Entry extends React.Component {
     constructor(props) {
@@ -25,6 +26,22 @@ export default class Entry extends React.Component {
     }
 
     render() {
-        return <Layout menuConfig={this.state.runtimeConfig} selectMenuIndex={this.selectMenuIndexHandler}/>
+        const runtimeConfig = this.state.runtimeConfig
+        let component = <FrontPage/>
+        if (runtimeConfig != null) {
+            const componentIdx = runtimeConfig.menu.findIndex((item) => item.selected)
+            if (componentIdx !== -1) {
+                component = runtimeConfig.menu[componentIdx].component
+            }
+        }
+
+        console.log("---", component)
+        return <div>
+            <Layout
+                menuConfig={this.state.runtimeConfig} 
+                selectMenuIndex={this.selectMenuIndexHandler}
+                component={component}
+            />
+        </div>
     }
 }

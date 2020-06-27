@@ -9,7 +9,12 @@ export default class Layout extends React.Component {
         return (
           <div className="cont-layout-root">
               <TopBar />
-              <LeftDrawer menuConfig={this.props.menuConfig} selectMenuIndex={this.props.selectMenuIndex}/>
+              <div className="cont-layout-mainarea">
+                  <LeftDrawer menuConfig={this.props.menuConfig} selectMenuIndex={this.props.selectMenuIndex}/>
+                  <div className="cont-layout-rightarea">
+                      {this.props.component}
+                  </div>
+              </div>
           </div>
         );
     }

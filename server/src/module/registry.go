@@ -5,7 +5,6 @@ import (
 	cve_query "enigma/server/src/module/cve-query"
 )
 
-
 func RegModules(G *defs.Global) {
 	G.Log.Info("modules: start init...")
 

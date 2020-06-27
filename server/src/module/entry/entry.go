@@ -53,6 +53,7 @@ func initEcho(G *defs.Global) {
 	// Middleware
 	GEcho.Use(middleware.Logger())
 	GEcho.Use(middleware.Recover())
+	GEcho.Use(middleware.CORS())
 
 	G.Echo = GEcho
 	G.Log.Info("init stage 2: G.Echo ready")

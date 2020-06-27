@@ -19,4 +19,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # private config
-config.private.js
+src/config.private.js

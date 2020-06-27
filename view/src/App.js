@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Layout from './containers/layout/Layout'
+import Entry from './modules/entry/index'
 
 const darkTheme = createMuiTheme({
   props: {
@@ -61,7 +61,7 @@ const darkTheme = createMuiTheme({
 
 function App() {
   return  <ThemeProvider theme={darkTheme}>
-    <Layout />
+    <Entry />
   </ThemeProvider>
 }
 

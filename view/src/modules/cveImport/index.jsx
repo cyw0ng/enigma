@@ -1,5 +1,4 @@
 import React from 'react'
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import http from '../../utils/rest/http'
@@ -18,23 +17,21 @@ export default class CVEImport extends React.Component {
 
     searchIdChangeHandler = (event) => {
         if (event.target.value !== this.state.searchId) {
-            this.setState({searchId: event.target.value})
+            this.setState({ searchId: event.target.value })
         }
     }
 
     render() {
         return <div className="module-cveimport-root">
-            <Paper square>
-                <TextField
-                    label="CVSS ID"
-                    variant="outlined"
-                    size='small'
-                    onChange={this.searchIdChangeHandler}
-                />
-                <Button color='primary' variant="contained" onClick={this.searchKeyClickHandler}>
-                    Search
-                </Button>
-            </Paper>
+            <TextField
+                label="CVSS ID"
+                variant="outlined"
+                size='small'
+                onChange={this.searchIdChangeHandler}
+            />
+            <Button color='primary' variant="contained" onClick={this.searchKeyClickHandler}>
+                Search
+            </Button>
         </div>
     }
 }

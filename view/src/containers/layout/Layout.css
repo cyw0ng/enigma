@@ -8,8 +8,12 @@
 }
 
 .cont-layout-root .cont-layout-rightarea {
-    padding: 4rem 2rem 2rem 12rem;
+    padding: 4rem 2rem 2rem 10rem;
     height: calc(100vh - 6rem);
     background: #212121;
     overflow: scroll;
+}
+
+.cont-layout-root .cont-layout-rightarea .MuiPaper-root {
+    padding: 1rem;
 }

@@ -1,19 +1,19 @@
 .cont-leftdrawer-root .MuiPaper-root {
-    padding-top: 3rem;
-    z-index: 0;
+  padding-top: 3rem;
+  z-index: 0;
 }
 
 .cont-leftdrawer-root .MuiListItemIcon-root {
-    min-width: 32px;
+  min-width: 32px;
 }
 
 .cont-layout-root .cont-layout-rightarea {
-    padding: 4rem 2rem 2rem 10rem;
-    height: calc(100vh - 6rem);
-    background: #212121;
-    overflow: scroll;
+  padding: 4rem 2rem 2rem 10rem;
+  height: calc(100vh - 6rem);
+  background: #212121;
+  overflow: scroll;
 }
 
 .cont-layout-root .cont-layout-rightarea .MuiPaper-root {
-    padding: 1rem;
+  padding: 1rem;
 }

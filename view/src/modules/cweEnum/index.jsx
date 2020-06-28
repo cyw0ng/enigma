@@ -8,6 +8,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import strings from "../../utils/strings";
 
 export default class CWEEnum extends React.Component {
   constructor(props) {
@@ -43,7 +44,14 @@ export default class CWEEnum extends React.Component {
         key={index}
         onClick={(event) => this.handleSelectCWERow(event, index)}
       >
-        <ListItemText primary={"CWE-" + cweRecord.id + ": " + cweRecord.name} />
+        <ListItemText
+          primary={
+            "CWE-" +
+            cweRecord.id +
+            ": " +
+            strings.decodeGoEscapedString(cweRecord.name)
+          }
+        />
       </ListItem>
     );
   };
@@ -74,14 +82,14 @@ export default class CWEEnum extends React.Component {
                   {"CWE-" + cweRecord.id}
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  {cweRecord.name}
+                  {strings.decodeGoEscapedString(cweRecord.name)}
                 </Typography>
                 <Typography color="textSecondary">
                   {cweRecord.status + " / "}
                   <b>{cweRecord.weaknessabs}</b>
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {cweRecord.Description}
+                  {strings.decodeGoEscapedString(cweRecord.Description)}
                   <br />
                 </Typography>
               </CardContent>

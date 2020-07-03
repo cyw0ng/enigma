@@ -4,7 +4,6 @@ import (
 	"enigma/server/src/common/conns"
 	"enigma/server/src/common/defs"
 	"enigma/server/src/common/utils"
-	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.uber.org/zap"
 	"log"

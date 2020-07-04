@@ -40,12 +40,35 @@ func (path *TmpPath) SaveByteStreamAsFile(buf []byte, fileName string) (string, 
 	return tmpFile.fileMaskName, nil
 }
 
-func (path *TmpPath) GetFileWithMaskName(fileMaskName string) (*os.File, error) {
+func (path *TmpPath) OpenFileWithMaskName(fileMaskName string) (*os.File, error) {
+	filepath, err := path.GetFilePathWithMaskName(fileMaskName)
+	if err != nil {
+		return nil, err
+	} else {
+		return os.Open(filepath)
+	}
+}
+
+func (path *TmpPath) GetFilePathWithMaskName(fileMaskName string) (string, error) {
 	for _, tmpFile := range path.filelist {
 		if tmpFile.fileMaskName == fileMaskName {
-			return os.Open(path.Path + "/" +tmpFile.fileMaskName)
+			return path.generateRealPath(fileMaskName), nil
 		}
 	}
 
-	return nil, nil
+	return "", nil
+}
+
+func (path *TmpPath) generateRealPath(fileMaskName string) string {
+	return path.Path + "/" + fileMaskName
+}
+
+func (path *TmpPath) RemoveFileWithMaskName(fileMaskName string) error {
+	for _, tmpFile := range path.filelist {
+		if tmpFile.fileMaskName == fileMaskName {
+			return os.Remove(path.generateRealPath(fileMaskName))
+		}
+	}
+
+	return nil
 }

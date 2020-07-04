@@ -13,6 +13,6 @@ func main() {
 	entry.InitServer(&G)
 	module.RegModules(&G)
 
-	G.Log.Info(model.GetAllTables(G.DBConn, G.Cfg.GetString("conn.mysql_main_schema")))
+	G.Log.Info(model.GetAllTables(G.DBConn, G.Cfg.GetString("conn.F")))
 	G.Echo.Start(":1323")
 }

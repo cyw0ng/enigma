@@ -11,6 +11,10 @@
     "tmpPath": "tmp"
   },
   "resources": {
-    "capecOriginalList": "https://capec.mitre.org/data/xml/views/3000.xml.zip"
+    "capecXMLList": {
+      "url": "https://capec.mitre.org/data/xml/views/3000.xml.zip",
+      "fileName": "3000.xml",
+      "category": "capec"
+    }
   }
 }

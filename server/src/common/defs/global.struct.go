@@ -16,6 +16,12 @@ type Global struct {
 	Log    *zap.SugaredLogger
 	OBS *minio.Client
 	Tmp TmpPath
+
+	Modules struct {
+		Capec struct {
+			AnalyzeInfo CapecAnalyzeInfo
+		}
+	}
 }
 
 type TmpFile struct {
@@ -27,4 +33,12 @@ type TmpFile struct {
 type TmpPath struct {
 	Path string
 	filelist []TmpFile
+}
+
+type FileInfoRecord struct {
+	Id int `json:"id"`
+	Filename string `json:"filename"`
+	Fileurl string `json:"fileurl"`
+	Minio_path string `json:"minio_path"`
+	Category string `json:"category"`
 }

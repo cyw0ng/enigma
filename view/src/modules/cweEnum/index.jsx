@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import strings from "../../utils/strings";
 
+import "./index.css";
+
 export default class CWEEnum extends React.Component {
   constructor(props) {
     super(props);
@@ -71,13 +73,14 @@ export default class CWEEnum extends React.Component {
     console.log(cweRecord);
 
     return (
-      <div>
+      <div className="cont-cweviewer-root">
         CWEEnum
         <FixedSizeList
-          height={400}
+          height={600}
           width={300}
           itemSize={46}
           itemCount={this.state.cweList.length}
+          className="cont-cweviewer-listroot"
         >
           {this.renderCWERows}
         </FixedSizeList>

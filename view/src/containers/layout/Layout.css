@@ -16,4 +16,6 @@
 
 .cont-layout-root .cont-layout-rightarea .MuiPaper-root {
   padding: 1rem;
+  box-sizing: border-box;
+  height: 100%;
 }

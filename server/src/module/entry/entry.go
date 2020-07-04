@@ -17,6 +17,7 @@ func InitServer(G *defs.Global) {
 	initDBConn(G)
 	initEcho(G)
 	initOBS(G)
+	initTmpPath(G)
 }
 
 func initLog(G *defs.Global) {
@@ -73,6 +74,42 @@ func initOBS(G *defs.Global) {
 		G.Log.Fatal("error: cannot init Minio OBS client")
 	}
 
+	buckets, err := GOBS.ListBuckets()
+	if err != nil {
+		G.Log.Fatal("error: cannot init target Minio bucket")
+	}
+	isBucketExists := false
+	mainBucketName := G.Cfg.GetString("conn.minio_main_bucket")
+	for _, bucket := range buckets {
+		if bucket.Name == mainBucketName {
+			isBucketExists = true
+		}
+	}
+
+	if !isBucketExists {
+		err = GOBS.MakeBucket(mainBucketName, "")
+		if err != nil {
+			G.Log.Fatal("error: cannot init main bucket")
+		}
+	}
+
+	isBucketExists, err = GOBS.BucketExists(mainBucketName)
+	if !isBucketExists || err != nil {
+		G.Log.Fatal("error: make bucket error")
+	}
+
 	G.OBS = GOBS
-	G.Log.Info("init stage 2: G.GOBS ready")
+	G.Log.Info("init stage 2: G.GOBS and main bucket ready")
+}
+
+func initTmpPath(G *defs.Global) {
+	var GTmp defs.TmpPath
+	GTmp.Path = G.Cfg.GetString("runtime.tmpPath")
+	if GTmp.Init(G) != nil {
+		G.Log.Fatal("error: fail to make tmpPath")
+	} else {
+		G.Log.Info("init stage 2: G.Tmp ready with tmp file paths")
+	}
+
+	G.Tmp = GTmp
 }

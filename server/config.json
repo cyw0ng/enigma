@@ -7,6 +7,9 @@
     "minio_access_key": "ENV:ENIGMA_MINIO_ACCESS_KEY",
     "minio_secret_key": "ENV:ENIGMA_MINIO_SECRET_KEY"
   },
+  "runtime": {
+    "tmpPath": "tmp"
+  },
   "resources": {
     "capecOriginalList": "https://capec.mitre.org/data/xml/views/3000.xml.zip"
   }

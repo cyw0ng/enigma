@@ -16,3 +16,6 @@ vendor/
 
 # Ignore private config
 configs/private.json
+
+# Temp path
+tmp

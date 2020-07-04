@@ -1,6 +1,7 @@
 import React from "react";
 import http from "../../utils/rest/http";
 import { FixedSizeList } from "react-window";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Card from "@material-ui/core/Card";
@@ -72,9 +73,17 @@ export default class CWEEnum extends React.Component {
     }
     console.log(cweRecord);
 
+    if (this.state.cweList.length === 0) {
+      return (
+        <div className="cont-cweviewer-spinner">
+          <CircularProgress />
+          <div className="cont-cweviewer-prompt">On loading...</div>
+        </div>
+      );
+    }
+
     return (
       <div className="cont-cweviewer-root">
-        CWEEnum
         <FixedSizeList
           height={600}
           width={300}

@@ -2,6 +2,8 @@
   "conn": {
     "mysql_main_schema": "enigma",
     "mysql_conn_str": "ENV:ENIGMA_MYSQL_CONN_STR",
+    "minio_main_bucket": "enigma",
+    "minio_endpoint": "ENV:ENIGMA_MINIO_ENDPOINT",
     "minio_access_key": "ENV:ENIGMA_MINIO_ACCESS_KEY",
     "minio_secret_key": "ENV:ENIGMA_MINIO_SECRET_KEY"
   },

@@ -3,6 +3,7 @@ package defs
 import (
 	"database/sql"
 	"github.com/labstack/echo/v4"
+	"github.com/minio/minio-go/v6"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )
@@ -12,4 +13,5 @@ type Global struct {
 	DBConn *sql.DB
 	Echo   *echo.Echo
 	Log    *zap.SugaredLogger
+	OBS *minio.Client
 }

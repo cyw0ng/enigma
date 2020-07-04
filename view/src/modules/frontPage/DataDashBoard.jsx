@@ -12,18 +12,22 @@ import http from "../../utils/rest/http";
 export default class DataDashBoard extends React.Component {
   state = {
     metrics: [],
+    readyMetrics: [],
   };
 
   componentDidMount() {
     this.getCurrentCirclInfo();
+    this.getCapecCountInDB();
   }
 
   getCurrentCirclInfo() {
     http.get("/rest/v1/cve-query/circl/info").then(({ data }) => {
+      let appendedMetrics = Array.from(this.state.metrics);
+      let appendedReadyMetrics = Array.from(this.state.readyMetrics);
       for (const [key, value] of Object.entries(data.payload)) {
         if (value.last_update) {
-          this.state.metrics.push({
-            metric: "CirclInfo: " + key,
+          appendedMetrics.push({
+            metric: "CirclInfo Original Size: " + key,
             value: value.size,
             origin: "CirclInfo",
             updateDate: value.last_update,
@@ -31,14 +35,48 @@ export default class DataDashBoard extends React.Component {
           });
         }
       }
-      this.setState({ circlInfo: data.payload });
+      appendedReadyMetrics.push("CirclInfo");
+      this.setState({
+        metrics: appendedMetrics,
+        readyMetrics: appendedReadyMetrics,
+      });
     });
   }
 
+  getCapecCountInDB() {
+    http.get("/rest/v1/cve-query/capec/count").then(({ data }) => {
+      let appendedMetrics = Array.from(this.state.metrics);
+      let appendedReadyMetrics = Array.from(this.state.readyMetrics);
+      appendedMetrics.push({
+        metric: "InDBInfo Table Size: CAPEC list",
+        value: data.payload,
+        origin: "InDBInfo",
+        updateDate: Date().toString(),
+        id: "InDBInfo-capeclist",
+      });
+      appendedReadyMetrics.push("InDBInfo-capeclist");
+
+      this.setState({
+        metrics: appendedMetrics,
+        readyMetrics: appendedReadyMetrics,
+      });
+    });
+  }
+
+  isMetricsGetReady = () => {
+    return (
+      this.state.readyMetrics.findIndex((item) => item === "CirclInfo") > -1 &&
+      this.state.readyMetrics.findIndex(
+        (item) => item === "InDBInfo-capeclist"
+      ) > -1
+    );
+  };
+
   render() {
-    if (this.state.metrics.length === 0) {
+    if (!this.isMetricsGetReady()) {
       return <div>Preparing CirclInfo data...</div>;
     }
+    console.log(this.state);
     return (
       <div>
         <TableContainer component={Paper}>

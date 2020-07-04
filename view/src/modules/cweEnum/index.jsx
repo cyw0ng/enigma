@@ -33,6 +33,13 @@ export default class CWEEnum extends React.Component {
     this.setState({ selectedIndex: index });
   };
 
+  handleCWELinkReuest = (event, targetID) => {
+    window.open(
+      "https://cwe.mitre.org/data/definitions/" + targetID + ".html",
+      "target"
+    );
+  };
+
   renderCWERows = (props) => {
     const { index, style } = props;
     const cweRecord = this.state.cweList[index];
@@ -94,7 +101,14 @@ export default class CWEEnum extends React.Component {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button
+                  size="small"
+                  onClick={(event) =>
+                    this.handleCWELinkReuest(event, cweRecord.id)
+                  }
+                >
+                  Learn More
+                </Button>
               </CardActions>
             </Card>
           </div>

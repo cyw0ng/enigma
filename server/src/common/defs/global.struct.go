@@ -2,6 +2,7 @@ package defs
 
 import (
 	"database/sql"
+	"github.com/labstack/echo/v4"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )

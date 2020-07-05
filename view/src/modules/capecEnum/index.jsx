@@ -105,14 +105,16 @@ class CAPECEnum extends React.Component {
       let severityIndex = capecSeverity.indexOf(capecItem.typical_severity);
       let likelyIndex = capecLikelihood.indexOf(capecItem.likelihood_of_attack);
 
-      capecGraphObj.children[severityIndex].children[likelyIndex].children.push(
-        {
+      if (severityIndex !== -1 && likelyIndex !== -1) {
+        capecGraphObj.children[severityIndex].children[
+          likelyIndex
+        ].children.push({
           name: "CAPEC-" + capecItem.id,
           value: capecItem.name,
           children: childrenList,
           collapsed: true,
-        }
-      );
+        });
+      }
     });
 
     chartsCAPEC2CWE.series[0].data = [capecGraphObj];

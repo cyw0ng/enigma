@@ -34,14 +34,14 @@ func ParseCapecXML(G *defs.Global, capecXMLName string, category string) error {
 }
 
 func insertCapecRecordsIntoDB(DBConn *sql.DB, capecRecords []defs.CapecRecord) error {
-	insertPrefix := "INSERT IGNORE INTO enigma.capeclist (id, name, prerequisites, related_weakness, description, likelihood_of_attack) VALUES "
+	insertPrefix := "INSERT IGNORE INTO enigma.capeclist (id, name, prerequisites, related_weakness, description, likelihood_of_attack, typical_severity) VALUES "
 
 	var buf bytes.Buffer
 
 	for i, record := range capecRecords {
 		prerequisitesStr := strings.Join(record.Prerequisites, "\n")
 		relatedWeaknessStr := strings.Join(record.RelatedWeakness, "\n")
-		buf.WriteString("('" + record.ID + "', '" + record.Name + "', '" + prerequisitesStr + "', '" + relatedWeaknessStr + "', '" + record.Description + "', '" + record.LikelihoodOfAttack  + "'), ")
+		buf.WriteString("('" + record.ID + "', '" + record.Name + "', '" + prerequisitesStr + "', '" + relatedWeaknessStr + "', '" + record.Description + "', '" + record.LikelihoodOfAttack + "', '" + record.TypicalSeverity + "'), ")
 		if i != 0 && (i%40 == 0 || i == len(capecRecords)-1) {
 			statement := insertPrefix + buf.String()
 			statement = statement[0 : len(statement)-2]
@@ -72,6 +72,7 @@ func convertIntoCapecRecords(capecFullXML defs.CapecXML) ([]defs.CapecRecord, er
 			capecRecord.RelatedWeakness = append(capecRecord.RelatedWeakness, weakness.CWEID)
 		}
 		capecRecord.LikelihoodOfAttack = attack.LikelihoodOfAttack
+		capecRecord.TypicalSeverity = attack.TypicalSeverity
 
 		capecRecords = append(capecRecords, capecRecord)
 	}

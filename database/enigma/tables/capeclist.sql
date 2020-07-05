@@ -6,6 +6,7 @@ CREATE TABLE `capeclist`
     `related_weakness`     varchar(225)  DEFAULT NULL,
     `description`          varchar(2048) DEFAULT NULL,
     `likelihood_of_attack` varchar(45)   DEFAULT NULL,
+    `typical_severity`     varchar(45)   DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE = InnoDB

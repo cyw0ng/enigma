@@ -30,13 +30,12 @@ class CAPECEnum extends React.Component {
   getCWEListAll = () =>
     http.get("/rest/v1/cve-query/cwe/all").then(({ data }) => {
       if (data.code === 0) {
+        data.payload.forEach((item) => {
+          this.cweIdMap[item.id] = item;
+        });
         this.setState({
           cweList: data.payload,
           fetchedLists: [...this.state.fetchedLists, "cweList"],
-        });
-
-        data.payload.forEach((item) => {
-          this.cweIdMap[item.id] = item;
         });
       }
     });

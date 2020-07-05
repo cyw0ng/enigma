@@ -76,7 +76,6 @@ export default class DataDashBoard extends React.Component {
     if (!this.isMetricsGetReady()) {
       return <div>Preparing CirclInfo data...</div>;
     }
-    console.log(this.state);
     return (
       <div>
         <TableContainer component={Paper}>

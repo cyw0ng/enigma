@@ -12,7 +12,6 @@ export default class CVEImport extends React.Component {
 
   searchKeyClickHandler = () => {
     http.get("/rest/v1/cve-query/cve/v1?id=" + this.state.searchId);
-    console.log(this.state.searchId);
   };
 
   searchIdChangeHandler = (event) => {

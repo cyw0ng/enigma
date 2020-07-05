@@ -37,7 +37,6 @@ export default class Entry extends React.Component {
       }
     }
 
-    console.log("---", component);
     return (
       <div>
         <Layout

@@ -71,7 +71,6 @@ export default class CWEEnum extends React.Component {
     if (this.state.selectedIndex >= 0) {
       cweRecord = this.state.cweList[this.state.selectedIndex];
     }
-    console.log(cweRecord);
 
     if (this.state.cweList.length === 0) {
       return (

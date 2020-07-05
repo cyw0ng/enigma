@@ -56,7 +56,6 @@ class CAPECEnum extends React.Component {
       document.getElementById("cont-capec-tocwe-echarts")
     );
     this.populateCAPEC2CWEData(chartsCAPEC2CWE);
-    console.log(chartsCAPEC2CWE);
     myChart.setOption(chartsCAPEC2CWE);
   };
 

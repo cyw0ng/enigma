@@ -77,12 +77,12 @@ class CAPECEnum extends React.Component {
       name: "CAPEC",
       children: capecSeverity.map((level) => {
         return {
-          name: "Serverity: " + (level.length == 0 ? "Unspecified" : level),
+          name: "Serverity: " + (level.length === 0 ? "Unspecified" : level),
           value: level,
           children: capecLikelihood.map((likely) => {
             return {
               name:
-                "Likelihood: " + (likely.length == 0 ? "Unspecified" : likely),
+                "Likelihood: " + (likely.length === 0 ? "Unspecified" : likely),
               value: likely,
               children: [],
             };
@@ -94,7 +94,7 @@ class CAPECEnum extends React.Component {
     this.state.capecList.forEach((capecItem) => {
       let childrenList = [];
       capecItem.related_weakness.forEach((id) => {
-        if (id.length != 0) {
+        if (id.length !== 0) {
           const CWEName = this.getCWENameFromID(id);
           childrenList.push({
             name: "CWE-" + id + ":" + CWEName,

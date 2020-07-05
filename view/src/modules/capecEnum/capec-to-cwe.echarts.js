@@ -1,51 +1,36 @@
 export default {
-  title: {
-    text: "CAPEC to CWE",
-  },
-  toolbox: {
-    show: true,
-    feature: {
-      mark: { show: true },
-      saveAsImage: { show: true },
-    },
+  tooltip: {
+    trigger: "item",
+    triggerOn: "mousemove",
   },
   series: [
     {
-      name: "Fig Tree",
       type: "tree",
-      orient: "horizontal",
-      rootLocation: { x: 100, y: "center" },
-      nodePadding: 8,
-      layerPadding: 200,
-      hoverable: false,
-      roam: true,
-      symbolSize: 6,
-      itemStyle: {
-        normal: {
-          color: "#4883b4",
-          label: {
-            show: true,
-            position: "right",
-            formatter: "{b}",
-            textStyle: {
-              color: "#000",
-              fontSize: 12,
-            },
-          },
-          lineStyle: {
-            color: "#ccc",
-            type: "curve",
-          },
-        },
-        emphasis: {
-          color: "#4883b4",
-          label: {
-            show: false,
-          },
-          borderWidth: 0,
+      data: [],
+      top: "1%",
+      left: "7%",
+      bottom: "1%",
+      right: "20%",
+      symbolSize: 10,
+      edgeForkPosition: "30%",
+      label: {
+        position: "left",
+        verticalAlign: "middle",
+        align: "right",
+        fontSize: 12,
+        color: "#FFF",
+      },
+      leaves: {
+        label: {
+          position: "right",
+          verticalAlign: "middle",
+          align: "left",
         },
       },
-      data: [],
+
+      expandAndCollapse: true,
+      animationDuration: 550,
+      animationDurationUpdate: 750,
     },
   ],
 };

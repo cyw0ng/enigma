@@ -19,11 +19,7 @@ func (path *TmpPath) Init(G *Global) error {
 		return err
 	}
 
-	if err = os.Mkdir(path.Path, 0700); err != nil {
-		return err
-	}
-
-	return nil
+	return os.Mkdir(path.Path, 0700)
 }
 
 func (path *TmpPath) SaveByteStreamAsFile(buf []byte, fileName string) (string, error) {
@@ -44,9 +40,9 @@ func (path *TmpPath) OpenFileWithMaskName(fileMaskName string) (*os.File, error)
 	filepath, err := path.GetFilePathWithMaskName(fileMaskName)
 	if err != nil {
 		return nil, err
-	} else {
-		return os.Open(filepath)
 	}
+
+	return os.Open(filepath)
 }
 
 func (path *TmpPath) GetFilePathWithMaskName(fileMaskName string) (string, error) {

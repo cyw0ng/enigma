@@ -121,7 +121,7 @@ func GetCapecAllRecords(DBConn *sql.DB) ([]defs.CapecRecord, error) {
 	for selectResult.Next() {
 		prerequistes := ""
 		weaknesslist := ""
-		if err = selectResult.Scan(&capecRecord.ID, &capecRecord.Name, &prerequistes, &weaknesslist, &capecRecord.Description); err != nil {
+		if err = selectResult.Scan(&capecRecord.ID, &capecRecord.Name, &prerequistes, &weaknesslist, &capecRecord.Description, &capecRecord.LikelihoodOfAttack); err != nil {
 			return capecRecords, err
 		}
 

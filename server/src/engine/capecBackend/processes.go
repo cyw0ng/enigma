@@ -1,4 +1,4 @@
-package capec_analyze
+package capecBackend
 
 import "enigma/server/src/common/defs"
 

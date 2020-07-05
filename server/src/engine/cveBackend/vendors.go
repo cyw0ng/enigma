@@ -1,4 +1,4 @@
-package cve_search
+package cveBackend
 
 import (
 	"bytes"

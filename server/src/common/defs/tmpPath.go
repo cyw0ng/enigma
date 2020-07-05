@@ -29,7 +29,7 @@ func (path *TmpPath) Init(G *Global) error {
 func (path *TmpPath) SaveByteStreamAsFile(buf []byte, fileName string) (string, error) {
 	var tmpFile TmpFile
 	tmpFile.fileMaskName = utils.RandStringBytes(32)
-	err := ioutil.WriteFile(path.Path + "/" +tmpFile.fileMaskName, buf, 0600)
+	err := ioutil.WriteFile(path.Path+"/"+tmpFile.fileMaskName, buf, 0600)
 	if err != nil {
 		return "", err
 	}

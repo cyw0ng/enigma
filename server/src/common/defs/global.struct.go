@@ -14,8 +14,8 @@ type Global struct {
 	DBConn *sql.DB
 	Echo   *echo.Echo
 	Log    *zap.SugaredLogger
-	OBS *minio.Client
-	Tmp TmpPath
+	OBS    *minio.Client
+	Tmp    TmpPath
 
 	Modules struct {
 		Capec struct {
@@ -31,14 +31,14 @@ type TmpFile struct {
 }
 
 type TmpPath struct {
-	Path string
+	Path     string
 	filelist []TmpFile
 }
 
 type FileInfoRecord struct {
-	Id int `json:"id"`
-	Filename string `json:"filename"`
-	Fileurl string `json:"fileurl"`
+	Id         int    `json:"id"`
+	Filename   string `json:"filename"`
+	Fileurl    string `json:"fileurl"`
 	Minio_path string `json:"minio_path"`
-	Category string `json:"category"`
+	Category   string `json:"category"`
 }

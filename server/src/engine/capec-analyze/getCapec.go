@@ -9,10 +9,7 @@ import (
 	"os/exec"
 )
 
-func GetCapecXML(G *defs.Global) error {
-	category := G.Cfg.GetString("resources.capecXMLList.category")
-	capecXMLName := G.Cfg.GetString("resources.capecXMLList.fileName")
-
+func GetCapecXML(G *defs.Global, capecXMLName string, category string) error {
 	minioPath, err := getFileRecordFromDB(G.DBConn, capecXMLName, category)
 	if err != nil || minioPath == "" {
 		return getCapecXMLFromHTTPS(G, capecXMLName, category)
@@ -81,10 +78,10 @@ func getCapecXMLFromOBS(G *defs.Global, minioPath string) error {
 	mainBucketName := G.Cfg.GetString("conn.minio_main_bucket")
 	capecXMLName := G.Cfg.GetString("resources.capecXMLList.fileName")
 
-	return G.OBS.FGetObject(mainBucketName, minioPath, "tmp/" + capecXMLName, minio.GetObjectOptions{})
+	return G.OBS.FGetObject(mainBucketName, minioPath, "tmp/"+capecXMLName, minio.GetObjectOptions{})
 }
 
-func getFileRecordFromDB(DBConn *sql.DB, filename string, category string) (string, error){
+func getFileRecordFromDB(DBConn *sql.DB, filename string, category string) (string, error) {
 	selectQueryFmt := "SELECT minio_path FROM enigma.filelist WHERE filename = '%s' AND category = '%s';"
 	selectQuery := fmt.Sprintf(selectQueryFmt, filename, category)
 

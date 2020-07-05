@@ -80,8 +80,10 @@ func initOBS(G *defs.Global) {
 		isBucketExists = bucket.Name == mainBucketName
 	}
 
-	if isBucketExists || GOBS.MakeBucket(mainBucketName, "") != nil {
-		G.Log.Fatal("error: cannot init main bucket")
+	if !isBucketExists {
+		if GOBS.MakeBucket(mainBucketName, "") != nil {
+			G.Log.Fatal("error: cannot init main bucket")
+		}
 	}
 
 	if isBucketExists, err = GOBS.BucketExists(mainBucketName); !isBucketExists || err != nil {

@@ -63,13 +63,8 @@ func initEcho(G *defs.Global) {
 }
 
 func initOBS(G *defs.Global) {
-	endpoint := G.Cfg.GetString("conn.minio_endpoint")
-	accessKeyID := G.Cfg.GetString("conn.minio_access_key")
-	secretAccessKey := G.Cfg.GetString("conn.minio_secret_key")
-
-	useSSL := false
-
-	GOBS, err := minio.New(endpoint, accessKeyID, secretAccessKey, useSSL)
+	getStringFunc := G.Cfg.GetString
+	GOBS, err := minio.New(getStringFunc("conn.minio_endpoint"), getStringFunc("conn.minio_access_key"), getStringFunc("conn.minio_secret_key"), false)
 	if err != nil {
 		G.Log.Fatal("error: cannot init Minio OBS client")
 	}
@@ -79,22 +74,16 @@ func initOBS(G *defs.Global) {
 		G.Log.Fatal("error: cannot init target Minio bucket")
 	}
 	isBucketExists := false
-	mainBucketName := G.Cfg.GetString("conn.minio_main_bucket")
+	mainBucketName := getStringFunc("conn.minio_main_bucket")
 	for _, bucket := range buckets {
-		if bucket.Name == mainBucketName {
-			isBucketExists = true
-		}
+		isBucketExists = bucket.Name == mainBucketName
 	}
 
-	if !isBucketExists {
-		err = GOBS.MakeBucket(mainBucketName, "")
-		if err != nil {
-			G.Log.Fatal("error: cannot init main bucket")
-		}
+	if isBucketExists || GOBS.MakeBucket(mainBucketName, "") != nil {
+		G.Log.Fatal("error: cannot init main bucket")
 	}
 
-	isBucketExists, err = GOBS.BucketExists(mainBucketName)
-	if !isBucketExists || err != nil {
+	if isBucketExists, err = GOBS.BucketExists(mainBucketName); !isBucketExists || err != nil {
 		G.Log.Fatal("error: make bucket error")
 	}
 

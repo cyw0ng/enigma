@@ -7,6 +7,11 @@ import (
 	"enigma/server/src/module/entry"
 )
 
+/**
+ * G - Global object
+ *
+ * G serves as a common module to pass infra objects to modules
+ */
 var G defs.Global
 
 func main() {

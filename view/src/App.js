@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Entry from "./modules/entry/index";
+import { SnackbarProvider } from "notistack";
 
 const theme = createMuiTheme({
   props: {
@@ -148,7 +149,15 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Entry />
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <Entry />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func (path *TmpPath) Init(G *Global) error {
+func (path *TmpPath) Init() error {
 	_, err := os.Stat(path.Path)
 	if err != nil {
 		if !os.IsNotExist(err) {

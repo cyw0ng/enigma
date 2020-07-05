@@ -21,13 +21,14 @@ func InitServer(G *defs.Global) {
 }
 
 func initLog(G *defs.Global) {
-	if logger, err := zap.NewProduction(); err != nil {
+	logger, err := zap.NewProduction()
+	if err != nil {
 		log.Fatal("cannot init logger, abort")
-	} else {
-		sugar := logger.Sugar()
-		G.Log = sugar
-		G.Log.Info("init stage 1: G.Log ready")
 	}
+
+	sugar := logger.Sugar()
+	G.Log = sugar
+	G.Log.Info("init stage 1: G.Log ready")
 }
 
 func initCfg(G *defs.Global) {
@@ -94,7 +95,7 @@ func initOBS(G *defs.Global) {
 func initTmpPath(G *defs.Global) {
 	var GTmp defs.TmpPath
 	GTmp.Path = G.Cfg.GetString("runtime.tmpPath")
-	if GTmp.Init(G) != nil {
+	if GTmp.Init() != nil {
 		G.Log.Fatal("error: fail to make tmpPath")
 	} else {
 		G.Log.Info("init stage 2: G.Tmp ready with tmp file paths")

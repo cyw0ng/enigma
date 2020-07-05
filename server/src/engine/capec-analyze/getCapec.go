@@ -7,6 +7,7 @@ import (
 	"github.com/minio/minio-go/v6"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func GetCapecXML(G *defs.Global, capecXMLName string, category string) error {
@@ -106,4 +107,29 @@ func insertFileRecordToDB(DBConn *sql.DB, record defs.FileInfoRecord) error {
 	_, err := DBConn.Query(insertQuery)
 
 	return err
+}
+
+func GetCapecAllRecords(DBConn *sql.DB) ([]defs.CapecRecord, error) {
+	var capecRecords []defs.CapecRecord
+	 queryStatement := "SELECT * FROM enigma.capeclist;"
+	 selectResult, err := DBConn.Query(queryStatement)
+	 if err != nil {
+		return capecRecords, err
+	 }
+
+	var capecRecord defs.CapecRecord
+	for selectResult.Next() {
+		prerequistes := ""
+		weaknesslist := ""
+		if err = selectResult.Scan(&capecRecord.ID, &capecRecord.Name, &prerequistes, &weaknesslist, &capecRecord.Description); err != nil {
+			return capecRecords, err
+		}
+
+		capecRecord.Prerequisites = strings.Split(prerequistes, "\n")
+		capecRecord.RelatedWeakness = strings.Split(weaknesslist, "\n")
+
+		capecRecords = append(capecRecords, capecRecord)
+	}
+
+	return capecRecords, nil
 }

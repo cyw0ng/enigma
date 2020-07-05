@@ -27,7 +27,6 @@ export default class CWEEnum extends React.Component {
     http.get("/rest/v1/cve-query/cwe/all").then(({ data }) => {
       if (data.code === 0) {
         this.setState({ cweList: data.payload });
-      } else {
       }
     });
   }

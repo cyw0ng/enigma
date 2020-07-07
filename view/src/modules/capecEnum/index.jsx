@@ -3,6 +3,7 @@ import { withSnackbar } from "notistack";
 import http from "../../utils/rest/http";
 import echarts from "echarts";
 import chartsCAPEC2CWE from "./capec-to-cwe.echarts";
+import Draggable from "react-draggable";
 
 import "./index.css";
 
@@ -129,7 +130,9 @@ class CAPECEnum extends React.Component {
     return (
       <div className="cont-capec-root">
         CAPEC
-        <div id="cont-capec-tocwe-echarts" />
+        <Draggable>
+          <div id="cont-capec-tocwe-echarts" />
+        </Draggable>
       </div>
     );
   }

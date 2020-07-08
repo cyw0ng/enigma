@@ -3,6 +3,7 @@ import "./App.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Entry from "./modules/entry/index";
 import { SnackbarProvider } from "notistack";
+import EnigmaDebug from "./utils/debug/debug";
 
 const theme = createMuiTheme({
   props: {
@@ -147,6 +148,7 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  EnigmaDebug.init();
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider

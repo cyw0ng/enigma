@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 // import CreateTaskNode from "./component/CreateTaskNode";
-import "./common.css";
 import "./mxgraph.css";
 import {
   mxGraph,
@@ -248,30 +246,6 @@ class mxGraphGridAreaEditor extends Component {
     dragElt.style.width = "120px";
     dragElt.style.height = "40px";
     return dragElt;
-  };
-  createDragElement = () => {
-    const { graph } = this.state;
-    const tasksDrag = ReactDOM.findDOMNode(
-      this.refs.mxSidebar
-    ).querySelectorAll(".task");
-    Array.prototype.slice.call(tasksDrag).forEach((ele) => {
-      const value = ele.getAttribute("data-value");
-      let ds = mxUtils.makeDraggable(
-        ele,
-        this.graphF,
-        (graph, evt, target, x, y) =>
-          this.funct(graph, evt, target, x, y, value),
-        this.dragElt,
-        null,
-        null,
-        graph.autoscroll,
-        true
-      );
-      ds.isGuidesEnabled = function () {
-        return graph.graphHandler.guidesEnabled;
-      };
-      ds.createDragElement = mxDragSource.prototype.createDragElement;
-    });
   };
   selectionChanged = (graph, value) => {
     console.log("visible");
@@ -619,7 +593,6 @@ class mxGraphGridAreaEditor extends Component {
           this.setGraphSetting();
           this.initToolbar();
           this.settingConnection();
-          this.createDragElement();
           var parent = graph.getDefaultParent();
 
           // Adds cells to the model in a single step
@@ -654,52 +627,11 @@ class mxGraphGridAreaEditor extends Component {
   render() {
     return (
       <div>
-        <ul className="sidebar" ref="mxSidebar">
-          <li className="title" data-title="Task node" data-value="Task node">
-            Task node
-          </li>
-          <li
-            className="task"
-            data-title="Kafka->HDFS"
-            data-value="Channel task"
-          >
-            rectangle
-          </li>
-          <li
-            className="task"
-            data-title="A/B test task"
-            data-value="A/B test task"
-          >
-            A/Btest task
-          </li>
-          <li
-            className="task"
-            data-title="Hive->Email"
-            data-value="Report task"
-          >
-            Report task
-          </li>
-          <li className="task" data-title="Hive->Hive" data-value="HSQL task">
-            HSQL task
-          </li>
-          <li className="task" data-title="Shell task" data-value="Shell task">
-            Shell task
-          </li>
-          <li id="layout123">layout</li>
-        </ul>
         <div className="toolbar" ref="toolbar" />
         <div className="container-wrapper">
           <div className="container" ref="divGraph" />
         </div>
         <div className="changeInput" style={{ zIndex: 10 }} />
-        {/* {this.state.createVisile && (
-          <CreateTaskNode
-            currentTask={this.state.currentTask}
-            visible={this.state.createVisile}
-            handleCancel={this.handleCancel}
-            handleConfirm={this.handleConfirm}
-          />
-        )} */}
       </div>
     );
   }

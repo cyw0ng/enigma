@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { mxGraph, mxEvent, mxCompactTreeLayout } from "mxgraph-js";
+import Toolbar from "./components/Toolbar";
 
 export default class GraphProfiler extends Component {
-  graph = null;
-  layout = null;
+  state = {
+    graphObj: null,
+  };
 
   componentDidMount() {
     this.LoadGraph();
@@ -35,15 +37,22 @@ export default class GraphProfiler extends Component {
     });
 
     // 4. mount graph & layout to object
-    this.graph = graph;
-    this.layout = layout;
-
-    // 5. Deploy graph ondemand
-    this.loadGraphDemo();
+    this.setState(
+      {
+        graphObj: {
+          graph,
+          layout,
+        },
+      },
+      () => {
+        // 5. Deploy graph ondemand
+        this.loadGraphDemo();
+      }
+    );
   };
 
   loadGraphDemo = () => {
-    let graph = this.graph;
+    let graph = this.state.graphObj.graph;
     let parent = graph.getDefaultParent();
 
     // Adds cells to the model in a single step
@@ -59,6 +68,9 @@ export default class GraphProfiler extends Component {
     return (
       <div>
         <div className="container-wrapper">
+          <div className="cont-graphprofiler-toolbar-root">
+            <Toolbar graphObj={this.state.graphObj} />
+          </div>
           <div className="container" ref="divGraph" />
         </div>
       </div>

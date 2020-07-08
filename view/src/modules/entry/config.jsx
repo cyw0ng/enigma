@@ -5,6 +5,7 @@ import CallMergeIcon from "@material-ui/icons/CallMerge";
 import CVEImport from "../cveImport/index";
 import CWEEnum from "../cweEnum/index";
 import CAPECEnum from "../capecEnum/index";
+import AttackAnalyzer from "../attackAnalyzer/index";
 
 export default {
   menu: [
@@ -29,6 +30,14 @@ export default {
       label: "CAPEC Enum",
       icon: <CallMergeIcon />,
       component: <CAPECEnum />,
+      selected: false,
+      disabled: false,
+    },
+    {
+      id: "attack-analyzer",
+      label: "Attack",
+      icon: <CallMergeIcon />,
+      component: <AttackAnalyzer />,
       selected: false,
       disabled: false,
     },

@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../containers/layout/Layout";
 import Config from "./config";
 import FrontPage from "../frontPage/index";
+import AttackAnalyzer from "../attackAnalyzer";
 
 export default class Entry extends React.Component {
   constructor(props) {
@@ -28,6 +29,10 @@ export default class Entry extends React.Component {
   render() {
     const runtimeConfig = this.state.runtimeConfig;
     let component = <FrontPage />;
+    if (window.enigma_debug.isDebug) {
+      // TBD: Remove later, for 0.1.0 Development
+      component = <AttackAnalyzer />;
+    }
     if (runtimeConfig != null) {
       const componentIdx = runtimeConfig.menu.findIndex(
         (item) => item.selected

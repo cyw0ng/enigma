@@ -1,5 +1,5 @@
 import React from "react";
-import GraphProfiler from "./graphProfiler/MxGraphGridEditor.jsx";
+import GraphProfiler from "./graphProfiler/index.jsx";
 
 export default class AttackAnalyzer extends React.Component {
   render() {

@@ -1,0 +1,12 @@
+.cont-graphprofiler-ctxm-mask {
+  z-index: 999999;
+  background: content-box;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.cont-graphprofiler-ctxm-main {
+  background-color: red;
+  display: inline-block;
+}

@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { mxGraph, mxEvent, mxCompactTreeLayout } from "mxgraph-js";
 import Toolbar from "./components/Toolbar";
+import ContextMenu from "./components/Contextmenu";
 
 export default class GraphProfiler extends Component {
   state = {
     graphObj: null,
     isFullScreen: false,
+    popupProfile: null,
   };
 
   componentDidMount() {
@@ -37,6 +39,16 @@ export default class GraphProfiler extends Component {
       console.log("changed", evt);
     });
 
+    graph.popupMenuHandler.factoryMethod = (menu, cell, evt) =>
+      this.setState({
+        popupProfile: {
+          graph,
+          menu,
+          cell,
+          evt,
+        },
+      });
+
     // 4. mount graph & layout to object
     this.setState(
       {
@@ -62,6 +74,10 @@ export default class GraphProfiler extends Component {
     );
   };
 
+  handleCloseContextmenu = () => {
+    this.setState({ popupProfile: null });
+  };
+
   loadGraphDemo = () => {
     let graph = this.state.graphObj.graph;
     let parent = graph.getDefaultParent();
@@ -79,6 +95,10 @@ export default class GraphProfiler extends Component {
     return (
       <div>
         <div className="container-wrapper" ref="attackProfiler">
+          <ContextMenu
+            popupProfile={this.state.popupProfile}
+            onCloseContextmenu={this.handleCloseContextmenu}
+          />
           <div className="cont-graphprofiler-toolbar-root">
             <Toolbar
               graphObj={this.state.graphObj}

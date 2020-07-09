@@ -30,22 +30,19 @@ func getCapecXMLFromHTTPS(G *defs.Global, capecXMLName string, category string) 
 
 	getZipCmd := exec.Command("curl", capecXMLURL, "-o", capecZipFile)
 
-	_, err := getZipCmd.Output()
-	if err != nil {
+	if _, err := getZipCmd.Output(); err != nil {
 		return err
 	}
 
 	unZipCmd := exec.Command("unzip", capecZipFile, "-d", tmpPath)
 
-	_, err = unZipCmd.Output()
-	if err != nil {
+	if _, err := unZipCmd.Output(); err != nil {
 		return err
 	}
 
 	rmZipCmd := exec.Command("rm", "-rf", capecZipFile)
 
-	_, err = rmZipCmd.Output()
-	if err != nil {
+	if _, err := rmZipCmd.Output(); err != nil {
 		return err
 	}
 
@@ -57,8 +54,10 @@ func getCapecXMLFromHTTPS(G *defs.Global, capecXMLName string, category string) 
 	if err != nil {
 		return err
 	}
-	_, err = G.OBS.PutObject(mainBucketName, savedFilePath, xmlfile, xmlStat.Size(), minio.PutObjectOptions{})
-	if err != nil {
+	if _, err = G.OBS.PutObject(
+		mainBucketName, savedFilePath,
+		xmlfile, xmlStat.Size(),
+		minio.PutObjectOptions{}); err != nil {
 		return err
 	}
 
@@ -111,11 +110,11 @@ func insertFileRecordToDB(DBConn *sql.DB, record defs.FileInfoRecord) error {
 
 func GetCapecAllRecords(DBConn *sql.DB) ([]defs.CapecRecord, error) {
 	var capecRecords []defs.CapecRecord
-	 queryStatement := "SELECT * FROM enigma.capeclist;"
-	 selectResult, err := DBConn.Query(queryStatement)
-	 if err != nil {
+	queryStatement := "SELECT * FROM enigma.capeclist;"
+	selectResult, err := DBConn.Query(queryStatement)
+	if err != nil {
 		return capecRecords, err
-	 }
+	}
 
 	var capecRecord defs.CapecRecord
 	for selectResult.Next() {

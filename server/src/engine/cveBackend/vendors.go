@@ -50,10 +50,7 @@ func insertVendorlistToDB(DBConn *sql.DB, vendorlist *defs.CVEBrowse) error {
 
 	// TBD: Fix this session, critical performance hits
 	for i, vendor := range vendorlist.Vendor {
-		vendor = strings.Replace(vendor, "'", "", -1)
-		vendor = strings.Replace(vendor, "\"", "", -1)
-		vendor = strings.Replace(vendor, "\\", "", -1)
-		vendor = strings.Replace(vendor, " ", "", -1)
+		vendor = html.EscapeString(vendor)
 
 		buf.WriteString("('" + vendor + "'), ")
 		if i != 0 && (i%2000 == 0 || i == len(vendorlist.Vendor)-1) {
@@ -119,10 +116,11 @@ func getVendorlistFromHTTPS() (*defs.CVEBrowse, error) {
 func GetCWElist(G *defs.Global) ([]defs.CWERecord, error) {
 	G.Log.Info("--> " + time.Now().String())
 	cwelist, err := getCWElistFromDB(G.DBConn)
+	isGetFromDBErr := cwelist == nil || len(cwelist) == 0 || err != nil
 	G.Log.Info("<--" + time.Now().String())
-	if cwelist == nil || len(cwelist) == 0 || err != nil {
-		cwelist, err = getCWElistFromHTTPS()
-		if err != nil {
+
+	if isGetFromDBErr {
+		if cwelist, err = getCWElistFromHTTPS(); err != nil {
 			return nil, err
 		}
 
@@ -180,6 +178,7 @@ func getCWElistFromHTTPS() ([]defs.CWERecord, error) {
 func insertCWElistToDB(DBConn *sql.DB, cwelist []defs.CWERecord) error {
 	insertPrefix := "INSERT IGNORE INTO enigma.cwelist (cweId, description, name, relationships, status, weaknessabs) VALUES "
 
+	const updateModular = 200
 	var buf bytes.Buffer
 
 	// TBD: Fix this session, critical performance hits
@@ -188,14 +187,15 @@ func insertCWElistToDB(DBConn *sql.DB, cwelist []defs.CWERecord) error {
 		descriptions := html.EscapeString(cwe.Description)
 		name := html.EscapeString(cwe.Name)
 
-		buf.WriteString("(" + cwe.ID + ", '" + descriptions + "', '" + name + "', '" + relationships + "', '" + cwe.Status + "', '" + cwe.Weaknessabs + "'), ")
-		if i != 0 && (i%200 == 0 || i == len(cwelist)-1) {
+		updateFields := strings.Join([]string{cwe.ID, descriptions, name, relationships, cwe.Status, cwe.Weaknessabs}, ", '")
+		buf.WriteString("(" + updateFields + "'), ")
+
+		if i != 0 && (i%updateModular == 0 || i == len(cwelist)-1) {
 			statement := insertPrefix + buf.String()
 			statement = statement[0 : len(statement)-2]
 
 			buf.Truncate(0)
-			_, err := DBConn.Query(statement)
-			if err != nil {
+			if _, err := DBConn.Query(statement); err != nil {
 				return err
 			}
 		}

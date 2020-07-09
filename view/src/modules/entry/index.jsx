@@ -29,7 +29,7 @@ export default class Entry extends React.Component {
   render() {
     const runtimeConfig = this.state.runtimeConfig;
     let component = <FrontPage />;
-    if (window.enigma_debug.isDebug) {
+    if (window.enigmaDebug.isDebug) {
       // TBD: Remove later, for 0.1.0 Development
       component = <AttackAnalyzer />;
     }

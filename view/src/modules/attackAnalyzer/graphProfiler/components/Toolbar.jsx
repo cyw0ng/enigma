@@ -66,6 +66,9 @@ export default class Toolbar extends React.Component {
         if (this.props.graphObj.graph.view.scale !== 1) {
           this.props.graphObj.graph.zoomActual();
         }
+        break;
+      default:
+        break;
     }
 
     let zoomActualIndex = this.state.btns.findIndex(

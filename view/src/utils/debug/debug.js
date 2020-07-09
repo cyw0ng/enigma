@@ -4,9 +4,9 @@ const runIfDebug = (func) => (isDebug ? func() : "");
 const init = () => {
   if (isDebug) {
     console.warn("Enigma runs in Debug mode");
-    if (window.enigma_debug == null) {
-      console.warn("Enigma debug interface registered on window.enigma_debug");
-      window.enigma_debug = EnigmaDebug;
+    if (window.enigmaDebug == null) {
+      console.warn("Enigma debug interface registered on window.enigmaDebug");
+      window.enigmaDebug = EnigmaDebug;
     }
   }
 };

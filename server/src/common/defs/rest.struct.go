@@ -1,5 +1,13 @@
 package defs
 
+/**
+ * TBD: Fixing later to populate failed types
+ */
+const (
+	REST_CODE_SUCCESS = 0
+	REST_CODE_GENERIC_FAILED = 1
+)
+
 type HttpResponse struct {
 	Code    int32       `json:"code"`
 	Msg     string      `json:"msg"`
@@ -8,7 +16,7 @@ type HttpResponse struct {
 
 func SuccessResponse(payload interface{}) HttpResponse {
 	return HttpResponse{
-		Code:    0,
+		Code:    REST_CODE_SUCCESS,
 		Msg:     "success",
 		Payload: payload,
 	}

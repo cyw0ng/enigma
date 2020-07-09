@@ -7,12 +7,12 @@ import (
 	"strings"
 )
 
-func GetCVERecordFromID(G *defs.Global, cveId string) (*defs.CVERecord, error) {
-	return getCVERecordFromID(G, cveId)
+func GetCVERecordFromID(cveID string) (*defs.CVERecord, error) {
+	return getCVERecordFromID(cveID)
 }
 
-func getCVERecordFromID(G *defs.Global, cveId string) (*defs.CVERecord, error) {
-	url := strings.Replace(defs.GetCVERecordHTTPS, "cveId", cveId, -1)
+func getCVERecordFromID(cveID string) (*defs.CVERecord, error) {
+	url := strings.Replace(defs.GetCVERecordHTTPS, "cveId", cveID, -1)
 	response := cmds.CurlHttpsRequest(url)
 
 	cveRecord := &defs.CVERecord{}

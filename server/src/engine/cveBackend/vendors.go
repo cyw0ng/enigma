@@ -236,8 +236,8 @@ func GetCapecCountInDB(G *defs.Global) (int, error) {
 }
 
 func getCapecFromHTTPS(cweId int) (*defs.CapecRecord, error) {
-	capecQueryUri := strings.Replace(defs.GetCapecRecordHTTPS, "capecId", strconv.Itoa(cweId), -1)
-	response := cmds.CurlHttpsRequest(capecQueryUri)
+	capecQueryURI := strings.Replace(defs.GetCapecRecordHTTPS, "capecId", strconv.Itoa(cweId), -1)
+	response := cmds.CurlHttpsRequest(capecQueryURI)
 
 	capecRecord := &defs.CapecRecord{}
 

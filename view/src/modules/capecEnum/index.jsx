@@ -53,7 +53,7 @@ class CAPECEnum extends React.Component {
 
   renderCapecToCWE = () => {
     var myChart = echarts.init(
-      document.getElementById("cont-capec-tocwe-echarts")
+      document.getElementsByClassName("cont-capec-tocwe-echarts")[0]
     );
     this.populateCAPEC2CWEData(chartsCAPEC2CWE);
     myChart.setOption(chartsCAPEC2CWE);
@@ -131,7 +131,7 @@ class CAPECEnum extends React.Component {
       <div className="cont-capec-root">
         CAPEC
         <Draggable>
-          <div id="cont-capec-tocwe-echarts" />
+          <div className="cont-capec-tocwe-echarts" />
         </Draggable>
       </div>
     );

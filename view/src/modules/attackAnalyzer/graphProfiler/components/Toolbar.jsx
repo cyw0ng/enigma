@@ -3,29 +3,55 @@ import IconButton from "@material-ui/core/IconButton";
 import ZoomInIcon from "@material-ui/icons/ZoomIn";
 import ZoomOutIcon from "@material-ui/icons/ZoomOut";
 import SettingsBackupRestoreIcon from "@material-ui/icons/SettingsBackupRestore";
+import FullscreenIcon from "@material-ui/icons/Fullscreen";
+import FullscreenExitRoundedIcon from "@material-ui/icons/FullscreenExitRounded";
 
 export default class Toolbar extends React.Component {
   state = {
-    btns: [
-      {
-        id: "zoom-in",
-        icon: <ZoomInIcon fontSize="small" />,
-        onClickHandler: (event) => this.onZoomHandler("in"),
-        disabled: false,
-      },
-      {
-        id: "zoom-out",
-        icon: <ZoomOutIcon fontSize="small" />,
-        onClickHandler: (event) => this.onZoomHandler("out"),
-        disabled: false,
-      },
-      {
-        id: "zoom-actual",
-        icon: <SettingsBackupRestoreIcon fontSize="small" />,
-        onClickHandler: (event) => this.onZoomHandler("actual"),
-        disabled: true,
-      },
-    ],
+    btns: [],
+  };
+
+  componentWillReceiveProps() {
+    this.updateBtns();
+  }
+
+  updateBtns = () => {
+    this.setState({
+      btns: [
+        {
+          id: "zoom-in",
+          iconCallback: (props) => <ZoomInIcon fontSize="small" />,
+          onClickHandler: (event) => this.onZoomHandler("in"),
+          disabled: false,
+        },
+        {
+          id: "zoom-out",
+          iconCallback: (props) => <ZoomOutIcon fontSize="small" />,
+          onClickHandler: (event) => this.onZoomHandler("out"),
+          disabled: false,
+        },
+        {
+          id: "zoom-actual",
+          iconCallback: (props) => (
+            <SettingsBackupRestoreIcon fontSize="small" />
+          ),
+          onClickHandler: (event) => this.onZoomHandler("actual"),
+          disabled: true,
+        },
+        {
+          id: "switch-screens",
+          iconCallback: (props) => {
+            return !this.props.isFullScreen ? (
+              <FullscreenIcon fontSize="small" />
+            ) : (
+              <FullscreenExitRoundedIcon fontSize="small" />
+            );
+          },
+          onClickHandler: (event) => this.props.onFullScreenSwitch(),
+          disabled: false,
+        },
+      ],
+    });
   };
 
   onZoomHandler = (status) => {
@@ -64,7 +90,7 @@ export default class Toolbar extends React.Component {
       <div>
         {this.state.btns.map((btn) => (
           <IconButton disabled={btn.disabled} onClick={btn.onClickHandler}>
-            {btn.icon}
+            {btn.iconCallback(this.props)}
           </IconButton>
         ))}
       </div>

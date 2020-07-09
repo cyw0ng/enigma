@@ -7,6 +7,7 @@ import Toolbar from "./components/Toolbar";
 export default class GraphProfiler extends Component {
   state = {
     graphObj: null,
+    isFullScreen: false,
   };
 
   componentDidMount() {
@@ -51,6 +52,16 @@ export default class GraphProfiler extends Component {
     );
   };
 
+  handleFullScreenSwitch = () => {
+    let currentStatus = this.state.isFullScreen;
+    let profilerRoot = ReactDOM.findDOMNode(this.refs.attackProfiler);
+    this.setState({ isFullScreen: !currentStatus }, () =>
+      currentStatus
+        ? document.exitFullscreen()
+        : profilerRoot.requestFullscreen()
+    );
+  };
+
   loadGraphDemo = () => {
     let graph = this.state.graphObj.graph;
     let parent = graph.getDefaultParent();
@@ -67,9 +78,13 @@ export default class GraphProfiler extends Component {
   render() {
     return (
       <div>
-        <div className="container-wrapper">
+        <div className="container-wrapper" ref="attackProfiler">
           <div className="cont-graphprofiler-toolbar-root">
-            <Toolbar graphObj={this.state.graphObj} />
+            <Toolbar
+              graphObj={this.state.graphObj}
+              onFullScreenSwitch={this.handleFullScreenSwitch}
+              isFullScreen={this.state.isFullScreen}
+            />
           </div>
           <div className="container" ref="divGraph" />
         </div>

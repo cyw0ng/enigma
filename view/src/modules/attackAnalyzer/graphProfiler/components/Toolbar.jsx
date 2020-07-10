@@ -87,8 +87,6 @@ export default class Toolbar extends React.Component {
       return null;
     }
 
-    console.log(this.props.graphObj);
-
     return (
       <div>
         {this.state.btns.map((btn) => (

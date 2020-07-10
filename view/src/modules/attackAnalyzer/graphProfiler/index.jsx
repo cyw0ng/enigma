@@ -106,7 +106,11 @@ export default class GraphProfiler extends Component {
               isFullScreen={this.state.isFullScreen}
             />
           </div>
-          <div className="container" ref="divGraph" />
+          <div
+            className="container"
+            ref="divGraph"
+            onClick={this.handleCloseContextmenu}
+          />
         </div>
       </div>
     );

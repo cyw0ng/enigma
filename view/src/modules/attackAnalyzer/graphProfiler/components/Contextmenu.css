@@ -4,9 +4,20 @@
   position: absolute;
   height: 100%;
   width: 100%;
+  pointer-events: none;
 }
 
 .cont-graphprofiler-ctxm-main {
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.6);
   display: inline-block;
+  pointer-events: all;
+  position: fixed;
+  width: 8rem;
+  border-radius: 4px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.cont-graphprofiler-ctxm-main .MuiTypography-body1 {
+  font-size: 0.75rem;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
+import { CSSTransitionGroup } from "react-transition-group";
 
 import "./Contextmenu.css";
 
@@ -24,17 +25,23 @@ export default class Contextmenu extends React.Component {
         onContextMenu={this.onNativeCtxm}
         data-role="mask"
       >
-        <div
-          className="cont-graphprofiler-ctxm-main"
-          style={{
-            left: popupProfile.graph.lastMouseX,
-            top: popupProfile.graph.lastMouseY,
-          }}
+        <CSSTransitionGroup
+          transitionName="trans-graphprofiler-ctxm"
+          transitionAppear={true}
+          transitionAppearTimeout={100}
         >
-          <Typography>Button1</Typography>
-          <Typography>Button2</Typography>
-          <Typography>Button3</Typography>
-        </div>
+          <div
+            className="cont-graphprofiler-ctxm-main"
+            style={{
+              left: popupProfile.graph.lastMouseX,
+              top: popupProfile.graph.lastMouseY,
+            }}
+          >
+            <Typography>Button1</Typography>
+            <Typography>Button2</Typography>
+            <Typography>Button3</Typography>
+          </div>
+        </CSSTransitionGroup>
       </div>
     );
   }

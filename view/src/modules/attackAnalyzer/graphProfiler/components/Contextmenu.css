@@ -14,10 +14,20 @@
   position: fixed;
   width: 8rem;
   border-radius: 4px;
-  padding: 2px;
+  padding: 0.35rem 0 0.35rem 0.8rem;
   box-sizing: border-box;
+  backdrop-filter: blur(5px);
 }
 
 .cont-graphprofiler-ctxm-main .MuiTypography-body1 {
   font-size: 0.75rem;
+}
+
+.trans-graphprofiler-ctxm-appear {
+  opacity: 0.01;
+}
+
+.trans-graphprofiler-ctxm-appear.trans-graphprofiler-ctxm-appear-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 }

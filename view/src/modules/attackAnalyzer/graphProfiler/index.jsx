@@ -4,6 +4,7 @@ import "./index.css";
 import { mxGraph, mxEvent, mxCompactTreeLayout } from "mxgraph-js";
 import Toolbar from "./components/Toolbar";
 import ContextMenu from "./components/Contextmenu";
+import RightPanel from "./components/RightPanel";
 
 export default class GraphProfiler extends Component {
   state = {
@@ -106,6 +107,9 @@ export default class GraphProfiler extends Component {
               onFullScreenSwitch={this.handleFullScreenSwitch}
               isFullScreen={this.state.isFullScreen}
             />
+          </div>
+          <div className="cont-graphprofiler-rpanel-root">
+            <RightPanel />
           </div>
           <div
             className="container"

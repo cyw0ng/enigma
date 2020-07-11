@@ -22,3 +22,18 @@
   border-bottom: 1px solid #ccc;
   backdrop-filter: blur(5px);
 }
+
+.cont-graphprofiler-rpanel-root {
+  position: absolute;
+  right: 1.25rem;
+  width: 12rem;
+  top: 3.75rem;
+  z-index: 999;
+  height: 70vh;
+  border-radius: 4px;
+  padding: 0.5rem 0.2rem;
+  background: rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  border-bottom: 1px solid #ccc;
+  backdrop-filter: blur(5px);
+}

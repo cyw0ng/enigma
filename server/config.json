@@ -16,5 +16,21 @@
       "fileName": "3000.xml",
       "category": "capec"
     }
+  },
+  "schemas": {
+    "gprof": {
+      "gprofprojects": {
+        "path": "database/enigma/tables/gprof/gprofprojects.sql",
+        "version": 0.1
+      },
+      "gproflinks": {
+        "path": "database/enigma/tables/gprof/gproflinks.sql",
+        "version": 0.1
+      },
+      "gprofnodes": {
+        "path": "database/enigma/tables/gprof/gprofnodes.sql",
+        "version": 0.1
+      }
+    }
   }
 }

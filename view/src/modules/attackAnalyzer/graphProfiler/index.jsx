@@ -13,7 +13,7 @@ export default class GraphProfiler extends Component {
   };
 
   componentDidMount() {
-    this.LoadGraph();
+    this.loadGraph();
   }
 
   selectionChange = (sender, evt) => {};
@@ -23,7 +23,7 @@ export default class GraphProfiler extends Component {
    *
    * This function contains steps to init a mxGraph
    */
-  LoadGraph = () => {
+  loadGraph = () => {
     // 1. Init core vars, prepare graph and layout
     let container = ReactDOM.findDOMNode(this.refs.divGraph);
     const graph = new mxGraph(container);
@@ -34,6 +34,7 @@ export default class GraphProfiler extends Component {
 
     // 3. Init other components related to graph, add change listerner
     graph.getSelectionModel().addListener(mxEvent.CHANGE, this.selectionChange);
+    graph.allowDanglingEdges = false;
 
     graph.getModel().addListener("change", (evt) => {
       console.log("changed", evt);

@@ -1,19 +1,49 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { withSnackbar } from "notistack";
 import { CSSTransitionGroup } from "react-transition-group";
+import TextField from "@material-ui/core/TextField";
 
 import "./Contextmenu.css";
 
-export default class Contextmenu extends React.Component {
+class Contextmenu extends React.Component {
   btns = [
     {
-      id: "obj-type",
-      style: { fontWeight: "bold" },
-      appearsCb: (popupType) =>
-        ["mask", "vertex", "edge"].indexOf(popupType) > -1,
-      textCb: (popupType) => popupType,
+      id: "vertex-rename",
+      appearsCb: (cell) => ["vertex"].indexOf(this.getPopupType(cell)) > -1,
+      childrenCb: (cell) => {
+        return (
+          <TextField
+            onKeyUp={(evt) => this.handleVertexRenameKeyUp(evt, cell)}
+            id="standard-basic"
+            size="small"
+            defaultValue={cell.value}
+            className="cont-graphprofiler-ctxm-ipt"
+          />
+        );
+      },
     },
   ];
+
+  handleVertexRenameKeyUp = (evt, cell) => {
+    if (evt.keyCode === 13) {
+      evt.preventDefault();
+      if (evt.target.value !== cell.value) {
+        if (evt.target.value.length === 0) {
+          this.props.enqueueSnackbar("Cannot change name to null", {
+            autoHideDuration: 5000,
+          });
+        }
+        this.props.onVertexRename(evt.target.value, cell);
+      } else {
+        this.props.enqueueSnackbar(
+          "Cannot change name, since the new one is same as old",
+          {
+            autoHideDuration: 5000,
+          }
+        );
+      }
+    }
+  };
 
   handleOnMaskClick = (evt) => {
     if (evt.target.dataset.role === "mask") {
@@ -42,7 +72,6 @@ export default class Contextmenu extends React.Component {
       return null;
     }
     const popupProfile = this.props.popupProfile;
-    const popupType = this.getPopupType(popupProfile.cell);
     return (
       <div
         className="cont-graphprofiler-ctxm-mask"
@@ -63,11 +92,9 @@ export default class Contextmenu extends React.Component {
             }}
           >
             {this.btns.map((btn) =>
-              btn.appearsCb(popupType) ? (
-                <Typography style={btn.style}>
-                  {btn.textCb(popupType)}
-                </Typography>
-              ) : null
+              btn.appearsCb(popupProfile.cell)
+                ? btn.childrenCb(popupProfile.cell)
+                : null
             )}
           </div>
         </CSSTransitionGroup>
@@ -75,3 +102,5 @@ export default class Contextmenu extends React.Component {
     );
   }
 }
+
+export default withSnackbar(Contextmenu);

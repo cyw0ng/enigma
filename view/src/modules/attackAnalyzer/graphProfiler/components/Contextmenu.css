@@ -31,3 +31,42 @@
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
+
+.cont-graphprofiler-ctxm-ipt.MuiFormControl-marginDense {
+  margin: 0;
+  width: 6.5rem;
+}
+
+.cont-graphprofiler-ctxm-ipt .MuiInput-inputMarginDense {
+  padding: 0;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.cont-graphprofiler-ctxm-ipt .MuiInput-formControl {
+  margin-top: 0;
+}
+
+.cont-graphprofiler-ctxm-ipt label.Mui-focused {
+  display: none;
+}
+
+.cont-graphprofiler-ctxm-ipt .MuiFormLabel-root {
+  font-size: 12px;
+}
+
+.cont-graphprofiler-ctxm-ipt .MuiInputLabel-shrink {
+  transform: translate(0, 10px) scale(0.75);
+}
+
+.cont-graphprofiler-ctxm-ipt .MuiInputLabel-animated {
+  top: -1rem;
+}
+
+.cont-graphprofiler-ctxm-ipt .Mui-focused {
+  color: white !important;
+}
+
+.cont-graphprofiler-ctxm-ipt .MuiInput-underline::after {
+  border-bottom: white !important;
+}

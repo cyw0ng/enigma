@@ -96,6 +96,11 @@ export default class GraphProfiler extends Component {
     this.setState({ popupProfile: null });
   };
 
+  handleVertexRename = (changedName, cell) => {
+    this.state.graphObj.graph.model.setValue(cell, changedName);
+    this.setState({ graphObj: this.state.graphObj });
+  };
+
   loadGraphDemo = () => {
     let graph = this.state.graphObj.graph;
     let parent = graph.getDefaultParent();
@@ -116,6 +121,7 @@ export default class GraphProfiler extends Component {
           <ContextMenu
             popupProfile={this.state.popupProfile}
             onCloseContextmenu={this.handleCloseContextmenu}
+            onVertexRename={this.handleVertexRename}
           />
           <div className="cont-graphprofiler-toolbar-root">
             <Toolbar

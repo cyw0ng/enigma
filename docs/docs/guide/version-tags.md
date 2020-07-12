@@ -1,0 +1,23 @@
+# Version Tags
+
+## Release versions
+
+## Pre-Release versions
+
+- [v0.1.0](https://github.com/cyw0ng/enigma/milestone/1) (tag: __v0.1.0-alpha__)
+    - 框架
+        - 项目初始化
+        - 完成基本框架搭建，集成数据库与 OSS 对象存储
+    - cve_query
+        - 完成 CAPEC-to-CWE Enum 页面 PoC
+        - 完成 CAPEC 自动获取功能
+
+## Development versions
+
+- [v0.1.1](https://github.com/cyw0ng/enigma/milestone/2) (branch: __dev/0.1.1/*__)
+    - attack-gprof
+        - 增加基于 mxGraph 的基本前端实现
+　
+- [v0.1.2](https://github.com/cyw0ng/enigma/milestone/3)
+- [v0.1.3](https://github.com/cyw0ng/enigma/milestone/4)
+- [v0.2.0](https://github.com/cyw0ng/enigma/milestone/5)

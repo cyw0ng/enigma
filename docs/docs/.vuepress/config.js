@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'Vuepress Docs Boilerplate',
+  title: 'Enigma',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -53,7 +53,7 @@ module.exports = {
           collapsable: false,
           children: [
             '',
-            'using-vue',
+            'version-tags',
           ]
         }
       ],

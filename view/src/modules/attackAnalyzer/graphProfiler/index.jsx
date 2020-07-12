@@ -11,13 +11,27 @@ export default class GraphProfiler extends Component {
     graphObj: null,
     isFullScreen: false,
     popupProfile: null,
+    mxObjectIdFocused: "",
   };
 
   componentDidMount() {
     this.loadGraph();
   }
 
-  selectionChange = (sender, evt) => {};
+  selectionChange = (sender, evt) => {
+    if (evt.properties.removed == null) {
+      if (this.state.mxObjectIdFocused !== "") {
+        this.setState({ mxObjectIdFocused: "" });
+      }
+    } else {
+      const removedEvt = evt.properties.removed[0];
+      if (removedEvt != null) {
+        this.setState({ mxObjectIdFocused: removedEvt.mxObjectId });
+      } else {
+        this.setState({ mxObjectIdFocused: "" });
+      }
+    }
+  };
 
   /**
    * LoadGraph: Init function of mxGraph
@@ -36,6 +50,8 @@ export default class GraphProfiler extends Component {
     // 3. Init other components related to graph, add change listerner
     graph.getSelectionModel().addListener(mxEvent.CHANGE, this.selectionChange);
     graph.allowDanglingEdges = false;
+    graph.cellsEditable = false;
+    // graph.addListener(mxEvent.CLICK, this.selectionChange);
 
     graph.getModel().addListener("change", (evt) => {
       console.log("changed", evt);
@@ -109,7 +125,10 @@ export default class GraphProfiler extends Component {
             />
           </div>
           <div className="cont-graphprofiler-rpanel-root">
-            <RightPanel />
+            <RightPanel
+              mxObjectIdFocused={this.state.mxObjectIdFocused}
+              graphObj={this.state.graphObj}
+            />
           </div>
           <div
             className="container"

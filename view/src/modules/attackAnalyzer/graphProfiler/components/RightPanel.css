@@ -1,0 +1,11 @@
+.cont-graph-ops-root {
+  height: 48vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.cont-obj-insight-objtype {
+  font-variant: petite-caps;
+  font-size: 12px;
+  float: right;
+  padding: 4px;
+}

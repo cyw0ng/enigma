@@ -6,6 +6,11 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/cyw0ng/enigma)](https://goreportcard.com/report/github.com/cyw0ng/enigma)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d9c90b56295645ab915f86d757b00182)](https://app.codacy.com/manual/dev.cyw0ng/enigma?utm_source=github.com&utm_medium=referral&utm_content=cyw0ng/enigma&utm_campaign=Badge_Grade_Dashboard)
 [![codebeat badge](https://codebeat.co/badges/e449f196-7ac9-4536-9c8f-88123eaf94e9)](https://codebeat.co/projects/github-com-cyw0ng-enigma-master)
+![circle ci badge](https://circleci.com/gh/cyw0ng/enigma.svg?style=shield)
+
+## Document Site
+
+Visit [here](https://cyw0ng.github.io/enigma-docsite/)
 
 ## Runtime Configuration
 

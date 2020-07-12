@@ -17,6 +17,8 @@
 - [v0.1.1](https://github.com/cyw0ng/enigma/milestone/2) (branch: __dev/0.1.1/*__)
     - attack-gprof
         - 增加基于 mxGraph 的基本前端实现
+    - docs
+        - 增加基于 vuepress 渲染，circleci 自动发布的文档站
 　
 - [v0.1.2](https://github.com/cyw0ng/enigma/milestone/3)
 - [v0.1.3](https://github.com/cyw0ng/enigma/milestone/4)

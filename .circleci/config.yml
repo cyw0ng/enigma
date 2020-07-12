@@ -1,0 +1,27 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "c5:a0:ec:87:e3:d1:ae:ab:4b:a3:b0:b0:3b:75:48:ca"
+      - run:
+          name: config global git vars
+          command: |
+            git config --global user.name cyw0ng
+            git config --global user.email dev.cyw0ng@gmail.com
+      - run:
+          name: generate docs
+          command: |
+            cd docs
+            npm install
+            npm run build
+            git clone git@github.com:cyw0ng/enigma-doc-sites.github.io.git upstream
+            rm -rf ./upstream/*
+            cp -rf .vuepress/dist/* ./upstream
+            cd ./upstream
+            git add ./.; git commit -m "circleci--[`date`]" -s
+            git push

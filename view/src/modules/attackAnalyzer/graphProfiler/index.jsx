@@ -58,7 +58,9 @@ export default class GraphProfiler extends Component {
     mxConstants.STYLE_FONTCOLOR = "black";
 
     graph.getModel().addListener("change", (evt) => {
-      console.log("changed", evt);
+      if (this.state.popupProfile != null) {
+        this.setState({ popupProfile: null });
+      }
     });
 
     graph.popupMenuHandler.factoryMethod = (menu, cell, evt) =>

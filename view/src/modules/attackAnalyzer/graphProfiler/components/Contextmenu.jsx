@@ -8,8 +8,9 @@ import "./Contextmenu.css";
 class Contextmenu extends React.Component {
   btns = [
     {
-      id: "vertex-rename",
-      appearsCb: (cell) => ["vertex"].indexOf(this.getPopupType(cell)) > -1,
+      id: "rename",
+      appearsCb: (cell) =>
+        ["vertex", "edge"].indexOf(this.getPopupType(cell)) > -1,
       childrenCb: (cell) => {
         return (
           <TextField

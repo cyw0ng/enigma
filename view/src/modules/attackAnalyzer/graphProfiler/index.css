@@ -24,6 +24,7 @@
 }
 
 .cont-graphprofiler-rpanel-root {
+  box-sizing: border-box;
   position: absolute;
   right: 1.25rem;
   width: 12rem;

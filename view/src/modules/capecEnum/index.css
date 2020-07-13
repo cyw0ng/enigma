@@ -4,6 +4,7 @@
 }
 
 .cont-capec-tocwe-window {
+  box-sizing: border-box;
   border: 1px solid #eee;
   width: 80vw;
   height: 40vh;

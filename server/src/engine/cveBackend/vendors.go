@@ -100,7 +100,7 @@ func getVendorlistFromDB(DBConn *sql.DB, offset int, limit int) (*defs.CVEBrowse
 }
 
 func getVendorlistFromHTTPS() (*defs.CVEBrowse, error) {
-	response := cmds.CurlHttpsRequest(defs.GetVendorlistHTTPS)
+	response := cmds.CurlHTTPSRequest(defs.GetVendorlistHTTPS)
 
 	vendorlist := &defs.CVEBrowse{}
 
@@ -162,7 +162,7 @@ func getCWElistFromDB(DBConn *sql.DB) ([]defs.CWERecord, error) {
 }
 
 func getCWElistFromHTTPS() ([]defs.CWERecord, error) {
-	response := cmds.CurlHttpsRequest(defs.GetCWERecordHTTPS)
+	response := cmds.CurlHTTPSRequest(defs.GetCWERecordHTTPS)
 
 	var cwelist []defs.CWERecord
 
@@ -237,7 +237,7 @@ func GetCapecCountInDB(G *defs.Global) (int, error) {
 
 func getCapecFromHTTPS(cweId int) (*defs.CapecRecord, error) {
 	capecQueryURI := strings.Replace(defs.GetCapecRecordHTTPS, "capecId", strconv.Itoa(cweId), -1)
-	response := cmds.CurlHttpsRequest(capecQueryURI)
+	response := cmds.CurlHTTPSRequest(capecQueryURI)
 
 	capecRecord := &defs.CapecRecord{}
 
@@ -251,7 +251,7 @@ func getCapecFromHTTPS(cweId int) (*defs.CapecRecord, error) {
 }
 
 func getCirclInfoFromHTTPS() (*defs.CirclInfo, error) {
-	response := cmds.CurlHttpsRequest(defs.GetCirclCurrentHTTPS)
+	response := cmds.CurlHTTPSRequest(defs.GetCirclCurrentHTTPS)
 
 	circlInfo := &defs.CirclInfo{}
 

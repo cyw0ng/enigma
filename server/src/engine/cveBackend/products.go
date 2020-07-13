@@ -13,7 +13,7 @@ func GetProductlist(G *defs.Global, vendor string) (*defs.CVEBrowse, error) {
 
 func getProductlistFromHTTPS(vendor string) (*defs.CVEBrowse, error) {
 	url := strings.Replace(defs.GetProductlistHTTPS, "vendor", vendor, -1)
-	response := cmds.CurlHttpsRequest(url)
+	response := cmds.CurlHTTPSRequest(url)
 
 	productlist := &defs.CVEBrowse{}
 

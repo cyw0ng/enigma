@@ -13,7 +13,7 @@ func GetCVERecordFromID(cveID string) (*defs.CVERecord, error) {
 
 func getCVERecordFromID(cveID string) (*defs.CVERecord, error) {
 	url := strings.Replace(defs.GetCVERecordHTTPS, "cveId", cveID, -1)
-	response := cmds.CurlHttpsRequest(url)
+	response := cmds.CurlHTTPSRequest(url)
 
 	cveRecord := &defs.CVERecord{}
 

@@ -2,6 +2,7 @@ import React from "react";
 import { withSnackbar } from "notistack";
 import { CSSTransitionGroup } from "react-transition-group";
 import TextField from "@material-ui/core/TextField";
+import Typograph from "@material-ui/core/Typography";
 
 import "./Contextmenu.css";
 
@@ -23,7 +24,68 @@ class Contextmenu extends React.Component {
         );
       },
     },
+    {
+      id: "remove-vertex-or-edge",
+      appearsCb: (cell) =>
+        ["vertex", "edge"].indexOf(this.getPopupType(cell)) > -1,
+      childrenCb: (cell) => {
+        return (
+          <Typograph
+            className="cont-graphprofiler-ctxm-btn"
+            onClick={(evt) => this.handleDeleteCell(evt, cell)}
+          >
+            Remove {this.getPopupType(cell)}
+          </Typograph>
+        );
+      },
+    },
+    {
+      id: "add-new-vertex",
+      appearsCb: (cell) => ["mask"].indexOf(this.getPopupType(cell)) > -1,
+      childrenCb: (cell) => {
+        return (
+          <Typograph
+            className="cont-graphprofiler-ctxm-btn"
+            onClick={(evt) => this.handleAddVertex(evt, cell)}
+          >
+            Add module
+          </Typograph>
+        );
+      },
+    },
   ];
+
+  handleAddVertex = (evt, cell) => {
+    let graph = this.props.popupProfile.graph;
+    if (graph == null) {
+      return;
+    }
+
+    let position = document
+      .querySelector(".cont-graphprofiler-root")
+      .getBoundingClientRect();
+    let parent = graph.getDefaultParent();
+    graph.getModel().beginUpdate();
+    graph.insertVertex(
+      parent,
+      null,
+      "Hello,",
+      evt.clientX - position.x,
+      evt.clientY - position.y,
+      80,
+      30
+    );
+    graph.getModel().endUpdate();
+  };
+
+  handleDeleteCell = (evt, cell) => {
+    let graph = this.props.popupProfile.graph;
+    if (cell != null && this.props.popupProfile.graph != null) {
+      graph.getModel().beginUpdate();
+      this.props.popupProfile.graph.removeCells([cell]);
+      graph.getModel().endUpdate();
+    }
+  };
 
   handleVertexRenameKeyUp = (evt, cell) => {
     if (evt.keyCode === 13) {

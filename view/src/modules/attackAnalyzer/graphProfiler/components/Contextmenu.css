@@ -70,3 +70,7 @@
 .cont-graphprofiler-ctxm-ipt .MuiInput-underline::after {
   border-bottom: white !important;
 }
+
+.cont-graphprofiler-ctxm-btn:hover {
+  cursor: pointer;
+}

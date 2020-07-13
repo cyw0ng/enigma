@@ -123,7 +123,7 @@ export default class GraphProfiler extends Component {
   render() {
     return (
       <div>
-        <div className="container-wrapper" ref="attackProfiler">
+        <div className="cont-graphprofiler-root" ref="attackProfiler">
           <ContextMenu
             popupProfile={this.state.popupProfile}
             onCloseContextmenu={this.handleCloseContextmenu}

@@ -9,3 +9,12 @@
   float: right;
   padding: 4px;
 }
+
+.cont-obj-insight-root {
+  opacity: 0;
+  transition: ease-in-out 0.3s opacity;
+}
+
+.cont-obj-insight-dimmed {
+  opacity: 1;
+}

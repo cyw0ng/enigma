@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { mxGraph, mxEvent, mxCompactTreeLayout } from "mxgraph-js";
+import { mxGraph, mxEvent, mxCompactTreeLayout, mxConstants } from "mxgraph-js";
 import Toolbar from "./components/Toolbar";
 import ContextMenu from "./components/Contextmenu";
 import RightPanel from "./components/RightPanel";
@@ -53,8 +53,14 @@ export default class GraphProfiler extends Component {
     graph.cellsEditable = false;
     // graph.addListener(mxEvent.CLICK, this.selectionChange);
 
+    // 4. Set default colors
+    mxConstants.STYLE_FILLCOLOR = "white";
+    mxConstants.STYLE_FONTCOLOR = "black";
+
     graph.getModel().addListener("change", (evt) => {
-      console.log("changed", evt);
+      if (this.state.popupProfile != null) {
+        this.setState({ popupProfile: null });
+      }
     });
 
     graph.popupMenuHandler.factoryMethod = (menu, cell, evt) =>
@@ -96,6 +102,11 @@ export default class GraphProfiler extends Component {
     this.setState({ popupProfile: null });
   };
 
+  handleVertexRename = (changedName, cell) => {
+    this.state.graphObj.graph.model.setValue(cell, changedName);
+    this.setState({ graphObj: this.state.graphObj });
+  };
+
   loadGraphDemo = () => {
     let graph = this.state.graphObj.graph;
     let parent = graph.getDefaultParent();
@@ -116,6 +127,7 @@ export default class GraphProfiler extends Component {
           <ContextMenu
             popupProfile={this.state.popupProfile}
             onCloseContextmenu={this.handleCloseContextmenu}
+            onVertexRename={this.handleVertexRename}
           />
           <div className="cont-graphprofiler-toolbar-root">
             <Toolbar

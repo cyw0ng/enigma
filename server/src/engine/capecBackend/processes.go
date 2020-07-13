@@ -9,9 +9,6 @@ func InitCapecAnalyze(G *defs.Global) error {
 	if err := GetCapecXML(G, capecXMLName, category); err != nil {
 		return err
 	}
-	if err := ParseCapecXML(G, capecXMLName, category); err != nil {
-		return err
-	}
 
-	return nil
+	return ParseCapecXML(G, capecXMLName, category)
 }

@@ -5,6 +5,7 @@ import ZoomOutIcon from "@material-ui/icons/ZoomOut";
 import SettingsBackupRestoreIcon from "@material-ui/icons/SettingsBackupRestore";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitRoundedIcon from "@material-ui/icons/FullscreenExitRounded";
+import CheckIcon from "@material-ui/icons/Check";
 
 export default class Toolbar extends React.Component {
   state = {
@@ -50,8 +51,18 @@ export default class Toolbar extends React.Component {
           onClickHandler: (event) => this.props.onFullScreenSwitch(),
           disabled: false,
         },
+        {
+          id: "verify-graph-validation",
+          iconCallback: (props) => <CheckIcon fontSize="small" />,
+          onClickHandler: (event) => this.onValidationHandler(),
+          disabled: false,
+        },
       ],
     });
+  };
+
+  onValidationHandler = () => {
+    this.props.onGraphValidationHandler();
   };
 
   onZoomHandler = (status) => {

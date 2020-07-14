@@ -5,6 +5,8 @@ import { mxGraph, mxEvent, mxCompactTreeLayout, mxConstants } from "mxgraph-js";
 import Toolbar from "./components/Toolbar";
 import ContextMenu from "./components/Contextmenu";
 import RightPanel from "./components/RightPanel";
+import validation from "./utils/validation";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default class GraphProfiler extends Component {
   state = {
@@ -12,6 +14,7 @@ export default class GraphProfiler extends Component {
     isFullScreen: false,
     popupProfile: null,
     mxObjectIdFocused: "",
+    onValidation: false,
   };
 
   componentDidMount() {
@@ -120,10 +123,24 @@ export default class GraphProfiler extends Component {
     graph.getModel().endUpdate();
   };
 
+  handleGraphValidation = () => {
+    this.setState({ onValidation: true }, () => {
+      if (!validation.validateGraph(this.state.graphObj)) {
+      }
+      this.setState({ onValidation: false });
+    });
+  };
+
   render() {
     return (
       <div>
         <div className="cont-graphprofiler-root" ref="attackProfiler">
+          {this.state.onValidation ? (
+            <div className="cont-gprof-validation-mask">
+              <CircularProgress className="cont-gprof-validation-spinner" />
+              <div className="cont-gprof-validation-prompt">Validating...</div>
+            </div>
+          ) : null}
           <ContextMenu
             popupProfile={this.state.popupProfile}
             onCloseContextmenu={this.handleCloseContextmenu}
@@ -133,6 +150,7 @@ export default class GraphProfiler extends Component {
             <Toolbar
               graphObj={this.state.graphObj}
               onFullScreenSwitch={this.handleFullScreenSwitch}
+              onGraphValidationHandler={this.handleGraphValidation}
               isFullScreen={this.state.isFullScreen}
             />
           </div>

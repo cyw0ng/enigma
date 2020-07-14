@@ -143,7 +143,7 @@ export default class GraphProfiler extends Component {
             />
           </div>
           <div
-            className="container"
+            className="cont-graphprofiler-graph-container"
             ref="divGraph"
             onClick={this.handleCloseContextmenu}
           />

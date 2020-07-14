@@ -3,6 +3,7 @@ import { withSnackbar } from "notistack";
 import { CSSTransitionGroup } from "react-transition-group";
 import TextField from "@material-ui/core/TextField";
 import Typograph from "@material-ui/core/Typography";
+import gprof from "../model/gprof";
 
 import "./Contextmenu.css";
 
@@ -66,15 +67,16 @@ class Contextmenu extends React.Component {
       .getBoundingClientRect();
     let parent = graph.getDefaultParent();
     graph.getModel().beginUpdate();
-    graph.insertVertex(
+    let insertedVertex = graph.insertVertex(
       parent,
       null,
-      "Hello,",
+      "<Named Later>",
       evt.clientX - position.x,
       evt.clientY - position.y,
       80,
       30
     );
+    insertedVertex.gprof = { ...gprof };
     graph.getModel().endUpdate();
   };
 

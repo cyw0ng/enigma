@@ -55,6 +55,7 @@ module.exports = {
           children: [
             '',
             'version-tags',
+            'gprof'
           ]
         }
       ],

@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { mxGraph, mxEvent, mxCompactTreeLayout, mxConstants } from "mxgraph-js";
+import {
+  mxGraph,
+  mxEvent,
+  mxCompactTreeLayout,
+  mxConstants,
+  mxGraphHandler,
+} from "mxgraph-js";
 import Toolbar from "./components/Toolbar";
 import ContextMenu from "./components/Contextmenu";
 import RightPanel from "./components/RightPanel";
@@ -56,6 +62,7 @@ export default class GraphProfiler extends Component {
     graph.getSelectionModel().addListener(mxEvent.CHANGE, this.selectionChange);
     graph.allowDanglingEdges = false;
     graph.cellsEditable = false;
+    mxGraphHandler.prototype.guidesEnabled = true;
     // graph.addListener(mxEvent.CLICK, this.selectionChange);
 
     // 4. Set default colors

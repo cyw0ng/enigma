@@ -7,6 +7,7 @@ import ContextMenu from "./components/Contextmenu";
 import RightPanel from "./components/RightPanel";
 import validation from "./utils/validation";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import LeftPanel from "./components/LeftPanel";
 
 export default class GraphProfiler extends Component {
   state = {
@@ -15,6 +16,7 @@ export default class GraphProfiler extends Component {
     popupProfile: null,
     mxObjectIdFocused: "",
     onValidation: false,
+    cellForDetailsCfg: null,
   };
 
   componentDidMount() {
@@ -131,6 +133,10 @@ export default class GraphProfiler extends Component {
     });
   };
 
+  handleCellDetails = (cell) => {
+    this.setState({ cellForDetailsCfg: cell, popupProfile: null });
+  };
+
   render() {
     return (
       <div>
@@ -145,6 +151,7 @@ export default class GraphProfiler extends Component {
             popupProfile={this.state.popupProfile}
             onCloseContextmenu={this.handleCloseContextmenu}
             onVertexRename={this.handleVertexRename}
+            handleCellDetails={this.handleCellDetails}
           />
           <div className="cont-graphprofiler-toolbar-root">
             <Toolbar
@@ -160,6 +167,13 @@ export default class GraphProfiler extends Component {
               graphObj={this.state.graphObj}
             />
           </div>
+
+          {this.state.cellForDetailsCfg != null ? (
+            <div className="cont-graphprofiler-lpanel-root">
+              <LeftPanel targetCell={this.state.cellForDetailsCfg} />
+            </div>
+          ) : null}
+
           <div
             className="cont-graphprofiler-graph-container"
             ref="divGraph"

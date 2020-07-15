@@ -1,0 +1,28 @@
+.cont-gprof-lpanel-tabs-root {
+  box-sizing: border-box;
+  width: 8rem;
+  border-right: 1px solid #eee;
+  height: 100%;
+  float: left;
+}
+
+.cont-gprof-lpanel-tabs-root button {
+  min-width: 0;
+}
+
+.cont-gprof-lpanel-tabs-root .MuiTab-wrapper {
+  align-items: baseline;
+  width: 8rem;
+}
+
+.cont-gprof-lpanel-main {
+  height: 100%;
+}
+
+.cont-gprof-lpanel-tabs-root .MuiTabs-indicator {
+  background-color: white;
+}
+
+.cont-gprof-lpanel-tabs-root .Mui-selected {
+  text-decoration: underline;
+}

@@ -54,8 +54,24 @@ class Contextmenu extends React.Component {
         );
       },
     },
+    {
+      id: "detailed-config",
+      appearsCb: (cell) =>
+        ["vertex", "edge"].indexOf(this.getPopupType(cell)) > -1,
+      childrenCb: (cell) => (
+        <Typograph
+          className="cont-graphprofiler-ctxm-btn"
+          onClick={(evt) => this.handleCellDetails(evt, cell)}
+        >
+          Configuration
+        </Typograph>
+      ),
+    },
   ];
 
+  handleCellDetails = (evt, cell) => {
+    this.props.handleCellDetails(cell);
+  };
   handleAddVertex = (evt, cell) => {
     let graph = this.props.popupProfile.graph;
     if (graph == null) {

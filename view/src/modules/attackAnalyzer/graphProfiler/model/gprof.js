@@ -3,11 +3,12 @@
  *
  * .version - Model Version
  * .profile
- *  .privilege - Privilege of module
  *  .parentId - Parent vertex ID
- *  .createdTime - Vertex, Edge - Creation time
- *  .modifiedTime - Vertex, Edge - Modified time
+ *  .createdTime - Creation time
+ *  .modifiedTime - Modified time
+ *  .privilege - Defines Later - Privilege of module
  *  .basics
+ *    .moduleModifiedTime - Vertex, Edge - Module last modified time
  *    .isOpenSource - Is module open source
  *    .isSelfDesign - Is module self designed
  *    .isSelfImpl - Is module self implemented
@@ -16,12 +17,14 @@
  *    .isOutsideBorder - Is module an outside border
  *    .isDefaultCfgSecure - Is module configured as default secured
  *  .assets
+ *    .moduleModifiedTime - Vertex, Edge - Module last modified time
  *    .storesSensitiveInfo - Is module stores sensitive info
  *    .processesSensitiveInfo - Is processes stores sensitive info
  *    .datastoreLocation
  *      .isStoredInMemory - Is sensitive info stored in memory
  *      .isStoredInStorage - Is sensitive info stored in storage
  *  .failsafe
+ *    .moduleModifiedTime - Vertex, Edge - Module last modified time
  *    .withModuleCE - Module contains Correctable Error
  *    .withModuleUE - Module contains Uncorrectable Error
  *    .withModuleFE - Module contains Fatal Error
@@ -41,45 +44,49 @@
  */
 const gprofVertexV1 = {
   version: 1,
+  name: "",
   profile: {
     privilege: 0,
     parentId: "",
-    createdTime: 1000000000000,
-    modifiedTime: 1000000000000,
+    createdTime: 0,
+    modifiedTime: 0,
     basics: {
+      moduleModifiedTime: 0,
       isOpenSource: false,
       isSelfDesign: false,
       isSelfImpl: false,
       isSelfCfg: false,
       isSecurityFeature: false,
-      isOutsideBorder: false
+      isOutsideBorder: false,
     },
     assets: {
+      moduleModifiedTime: 0,
       storesSensitiveInfo: false,
       processesSensitiveInfo: false,
       datastoreLocation: {
         isStoredInMemory: false,
-        isStoredInStorage: false
-      }
+        isStoredInStorage: false,
+      },
     },
     failsafe: {
+      moduleModifiedTime: 0,
       withModuleCE: false,
       withModuleUE: false,
       withModuleFE: false,
       withModuleNE: false,
-      descModuleCE: "No Error Here",
-      descModuleUE: "No Error Here",
-      descModuleFE: "No Error Here",
-      descModuleNE: "No Error Here",
+      descModuleCE: "",
+      descModuleUE: "",
+      descModuleFE: "",
+      descModuleNE: "",
       withParentCE: false,
       withParentUE: false,
       withParentFE: false,
       withParentNE: false,
-      descParentCE: "No Parent Error Here",
-      descParentUE: "No Parent Error Here",
-      descParentFE: "No Parent Error Here",
-      descParentNE: "No Parent Error Here"
-    }
+      descParentCE: "",
+      descParentUE: "",
+      descParentFE: "",
+      descParentNE: "",
+    },
   },
 };
 
@@ -99,7 +106,7 @@ const getCellType = (cell) => {
 
 export default {
   gprof: {
-    vertex: gprofVertexV1
+    vertex: gprofVertexV1,
   },
   getCellType,
 };

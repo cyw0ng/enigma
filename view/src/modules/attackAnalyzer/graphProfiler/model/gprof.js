@@ -2,11 +2,10 @@
  * gprofVertexV1 - Graph Profiler Model Add-on for vertex
  *
  * .version - Model Version
+ * .parentId - Parent vertex ID
+ * .createdTime - Creation time
+ * .modifiedTime - Modified time
  * .profile
- *  .parentId - Parent vertex ID
- *  .createdTime - Creation time
- *  .modifiedTime - Modified time
- *  .privilege - Defines Later - Privilege of module
  *  .basics
  *    .moduleModifiedTime - Vertex, Edge - Module last modified time
  *    .isOpenSource - Is module open source
@@ -44,12 +43,10 @@
  */
 const gprofVertexV1 = {
   version: 1,
-  name: "",
+  parentId: "",
+  createdTime: 0,
+  modifiedTime: 0,
   profile: {
-    privilege: 0,
-    parentId: "",
-    createdTime: 0,
-    modifiedTime: 0,
     basics: {
       moduleModifiedTime: 0,
       isOpenSource: false,
@@ -90,6 +87,18 @@ const gprofVertexV1 = {
   },
 };
 
+/**
+ * vertex - Current Vertex model
+ */
+const vertex = gprofVertexV1;
+
+const getDefaultVertex = (cell) => {
+  let newVertex = Object.assign(vertex);
+  newVertex.createdTime = new Date().getTime();
+
+  return newVertex;
+};
+
 const getCellType = (cell) => {
   if (cell == null) {
     return "mask";
@@ -106,7 +115,8 @@ const getCellType = (cell) => {
 
 export default {
   gprof: {
-    vertex: gprofVertexV1,
+    vertex,
   },
   getCellType,
+  getDefaultVertex,
 };

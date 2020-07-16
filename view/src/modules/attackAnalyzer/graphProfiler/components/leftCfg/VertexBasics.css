@@ -1,0 +1,16 @@
+.cont-gprof-lpanel-content {
+  float: left;
+  height: 100%;
+  width: 80%;
+  padding: 1rem;
+}
+
+.cont-gprof-lpanel-dataitem {
+  padding: 6px 0 0 4px;
+}
+
+.cont-gprof-lpanel-datalabel {
+  width: 24rem;
+  display: inline-block;
+  text-decoration: underline;
+}

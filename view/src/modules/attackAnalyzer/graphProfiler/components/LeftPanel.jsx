@@ -17,28 +17,29 @@ class LeftPanel extends React.Component {
     {
       tabId: "basics-vertex",
       label: "Basics",
-      isTabShow: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
-      component: <VertexBasics />,
+      isTabShowCb: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
+      componentCb: (cell) => <VertexBasics cell={cell} />,
     },
     {
       tabId: "assets-vertex",
       label: "Asset",
-      isTabShow: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
-      component: <VertexAsset />,
+      isTabShowCb: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
+      componentCb: (cell) => <VertexAsset cell={cell} />,
     },
     {
       tabId: "assets-privilege",
       label: "Privilege",
-      isTabShow: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
-      component: <VertexPrivilege />,
+      isTabShowCb: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
+      componentCb: (cell) => <VertexPrivilege cell={cell} />,
     },
   ];
+
   handleChange = (event, newTabID) => {
     this.setState({ currentTab: newTabID });
   };
   render() {
     const tabs = this.tabConfig.filter((tab) =>
-      tab.isTabShow(this.props.targetCell)
+      tab.isTabShowCb(this.props.targetCell)
     );
 
     return (
@@ -54,7 +55,7 @@ class LeftPanel extends React.Component {
           ))}
         </Tabs>
         <div className={"cont-gprof-lpanel-content"}>
-          {tabs[this.state.currentTab].component}
+          {tabs[this.state.currentTab].componentCb(this.props.targetCell)}
         </div>
       </div>
     );

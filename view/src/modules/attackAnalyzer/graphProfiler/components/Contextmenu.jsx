@@ -3,7 +3,7 @@ import { withSnackbar } from "notistack";
 import { CSSTransitionGroup } from "react-transition-group";
 import TextField from "@material-ui/core/TextField";
 import Typograph from "@material-ui/core/Typography";
-import gprof from "../model/gprof";
+import gprofModels from "../model/gprof";
 
 import "./Contextmenu.css";
 
@@ -92,7 +92,7 @@ class Contextmenu extends React.Component {
       80,
       30
     );
-    insertedVertex.gprof = { ...gprof };
+    insertedVertex.gprof = gprofModels.getDefaultVertex(insertedVertex);
     graph.getModel().endUpdate();
   };
 

@@ -19,7 +19,11 @@ class LeftPanel extends React.Component {
       label: "Basics",
       isTabShowCb: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
       componentCb: (cell) => (
-        <VertexBasics cell={cell} updateCell={this.props.updateCell} />
+        <VertexBasics
+          gprof={cell.gprof}
+          updateGprof={this.onUpdateGprof}
+          onCloseLpanel={this.props.onCloseLpanel}
+        />
       ),
     },
     {
@@ -38,6 +42,10 @@ class LeftPanel extends React.Component {
 
   handleChange = (event, newTabID) => {
     this.setState({ currentTab: newTabID });
+  };
+
+  onUpdateGprof = (gprof) => {
+    this.props.updateGprofForID(gprof, this.props.targetCell.id);
   };
   render() {
     const tabs = this.tabConfig.filter((tab) =>

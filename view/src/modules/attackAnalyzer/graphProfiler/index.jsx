@@ -151,9 +151,11 @@ export default class GraphProfiler extends Component {
   updateGprofForID = (gprof, id) => {
     let graph = this.state.graphObj.graph;
     let model = graph.getModel();
+    debugger;
     model.beginUpdate();
-    model.cells[id] = Object.assign(model.cells[id], gprof);
+    model.cells[id] = Object.assign(model.cells[id], { gprof });
     model.endUpdate();
+    debugger;
   };
 
   render() {

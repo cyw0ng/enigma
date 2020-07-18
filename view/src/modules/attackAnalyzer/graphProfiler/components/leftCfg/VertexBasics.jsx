@@ -1,6 +1,5 @@
 import React from "react";
 import Switch from "@material-ui/core/Switch";
-import Button from "@material-ui/core/Button";
 import "./VertexBasics.css";
 
 class VertexBasics extends React.Component {
@@ -87,14 +86,6 @@ class VertexBasics extends React.Component {
     },
   ];
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      originalGProf: this.props.gprof,
-      gprof: this.props.gprof,
-    };
-  }
-
   getDefaultSwitchItem = (gprof, path) => {
     return (
       <Switch
@@ -125,11 +116,7 @@ class VertexBasics extends React.Component {
       gprof.profile.basics.isOutsideBorder = checkedState;
     }
 
-    this.setState({ gprof });
-  };
-
-  onSaveUpdateGprof = () => {
-    this.props.updateGprof(this.state.gprof);
+    this.props.updateGprofSnapshot(gprof);
   };
 
   getCheckedState = (gprof, path) => {
@@ -147,7 +134,7 @@ class VertexBasics extends React.Component {
   };
 
   render() {
-    let gprof = this.state.gprof;
+    let gprof = this.props.gprof;
     if (gprof == null) {
       return null;
     }
@@ -160,14 +147,6 @@ class VertexBasics extends React.Component {
             {item.componentCb(gprof)}
           </div>
         ))}
-        <div className={"cont-gprof-lpanel-savebtn"}>
-          <Button variant="outlined" onClick={this.onSaveUpdateGprof}>
-            Save
-          </Button>
-          <Button variant="outlined" onClick={this.props.onCloseLpanel}>
-            Close
-          </Button>
-        </div>
       </div>
     );
   }

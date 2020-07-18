@@ -93,7 +93,7 @@ const gprofVertexV1 = {
 const vertex = gprofVertexV1;
 
 const getDefaultVertex = (cell) => {
-  let newVertex = Object.assign(vertex);
+  let newVertex = JSON.parse(JSON.stringify(vertex));
   newVertex.createdTime = new Date().getTime();
 
   return newVertex;

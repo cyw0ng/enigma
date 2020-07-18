@@ -1,6 +1,7 @@
 import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Button from "@material-ui/core/Button";
 
 import "./LeftPanel.css";
 import gprof from "../model/gprof";
@@ -11,6 +12,7 @@ import VertexPrivilege from "./leftCfg/VertexPrivilege";
 class LeftPanel extends React.Component {
   state = {
     currentTab: 0,
+    gprof: null,
   };
 
   tabConfig = [
@@ -20,9 +22,10 @@ class LeftPanel extends React.Component {
       isTabShowCb: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
       componentCb: (cell) => (
         <VertexBasics
-          gprof={cell.gprof}
+          gprof={this.state.gprof}
           updateGprof={this.onUpdateGprof}
           onCloseLpanel={this.props.onCloseLpanel}
+          updateGprofSnapshot={this.updateGprofSnapshot}
         />
       ),
     },
@@ -45,8 +48,17 @@ class LeftPanel extends React.Component {
   };
 
   onUpdateGprof = (gprof) => {
-    this.props.updateGprofForID(gprof, this.props.targetCell.id);
+    this.props.updateGprofForID(this.state.gprof, this.props.targetCell.id);
   };
+
+  updateGprofSnapshot = (gprof) => {
+    this.setState({ gprof });
+  };
+
+  componentWillMount() {
+    this.setState({ gprof: this.props.targetCell.gprof });
+  }
+
   render() {
     const tabs = this.tabConfig.filter((tab) =>
       tab.isTabShowCb(this.props.targetCell)
@@ -69,6 +81,14 @@ class LeftPanel extends React.Component {
         </div>
         <div className={"cont-gprof-lpanel-help"}>
           <div>Help</div>
+        </div>
+        <div className={"cont-gprof-lpanel-savebtns"}>
+          <Button variant="outlined" onClick={this.onUpdateGprof}>
+            Save
+          </Button>
+          <Button variant="outlined" onClick={this.props.onCloseLpanel}>
+            Close
+          </Button>
         </div>
       </div>
     );

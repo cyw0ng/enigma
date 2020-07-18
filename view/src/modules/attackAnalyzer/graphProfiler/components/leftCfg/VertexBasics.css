@@ -27,8 +27,13 @@
   cursor: help;
 }
 
-.cont-gprof-lpanel-savebtn {
+.cont-gprof-lpanel-savebtns {
   position: absolute;
-  right: 2rem;
-  bottom: 3rem;
+  right: 50%;
+  transform: translateX(1rem);
+  bottom: 1rem;
+}
+
+.cont-gprof-lpanel-savebtns button {
+  margin: 0 4px;
 }

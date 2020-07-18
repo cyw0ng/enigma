@@ -144,6 +144,14 @@ export default class GraphProfiler extends Component {
     this.setState({ cellForDetailsCfg: cell, popupProfile: null });
   };
 
+  onUpdateCell = (cell) => {
+    let graph = this.state.graphObj.graph;
+    let model = graph.getModel();
+    model.beginUpdate();
+    model.cells[cell.id] = cell;
+    model.endUpdate();
+  };
+
   render() {
     return (
       <div>
@@ -177,7 +185,10 @@ export default class GraphProfiler extends Component {
 
           {this.state.cellForDetailsCfg != null ? (
             <div className="cont-graphprofiler-lpanel-root">
-              <LeftPanel targetCell={this.state.cellForDetailsCfg} />
+              <LeftPanel
+                targetCell={this.state.cellForDetailsCfg}
+                updateCell={this.onUpdateCell}
+              />
             </div>
           ) : null}
 

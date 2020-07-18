@@ -1,8 +1,17 @@
 .cont-gprof-lpanel-content {
   float: left;
   height: 100%;
-  width: 80%;
+  width: 60%;
   padding: 1rem;
+}
+
+.cont-gprof-lpanel-help {
+  float: left;
+  height: 100%;
+  width: 20%;
+  padding: 1rem;
+  border-left: 1px dashed white;
+  box-sizing: border-box;
 }
 
 .cont-gprof-lpanel-dataitem {
@@ -13,4 +22,6 @@
   width: 24rem;
   display: inline-block;
   text-decoration: underline;
+  pointer-events: all;
+  cursor: help;
 }

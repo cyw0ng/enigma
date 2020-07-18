@@ -18,7 +18,9 @@ class LeftPanel extends React.Component {
       tabId: "basics-vertex",
       label: "Basics",
       isTabShowCb: (cell) => ["vertex"].indexOf(gprof.getCellType(cell)) > -1,
-      componentCb: (cell) => <VertexBasics cell={cell} />,
+      componentCb: (cell) => (
+        <VertexBasics cell={cell} updateCell={this.props.updateCell} />
+      ),
     },
     {
       tabId: "assets-vertex",
@@ -56,6 +58,9 @@ class LeftPanel extends React.Component {
         </Tabs>
         <div className={"cont-gprof-lpanel-content"}>
           {tabs[this.state.currentTab].componentCb(this.props.targetCell)}
+        </div>
+        <div className={"cont-gprof-lpanel-help"}>
+          <div>Help</div>
         </div>
       </div>
     );

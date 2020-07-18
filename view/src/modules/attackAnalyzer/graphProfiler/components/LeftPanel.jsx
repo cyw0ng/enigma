@@ -2,6 +2,7 @@ import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
+import { withSnackbar } from "notistack";
 
 import "./LeftPanel.css";
 import gprof from "../model/gprof";
@@ -49,6 +50,12 @@ class LeftPanel extends React.Component {
 
   onUpdateGprof = (gprof) => {
     this.props.updateGprofForID(this.state.gprof, this.props.targetCell.id);
+
+    this.props.enqueueSnackbar("New analyzed profile saved", {
+      autoHideDuration: 5000,
+    });
+
+    this.props.onCloseLpanel();
   };
 
   updateGprofSnapshot = (gprof) => {
@@ -95,4 +102,4 @@ class LeftPanel extends React.Component {
   }
 }
 
-export default LeftPanel;
+export default withSnackbar(LeftPanel);

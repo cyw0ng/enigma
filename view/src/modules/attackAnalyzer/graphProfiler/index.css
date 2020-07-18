@@ -25,13 +25,12 @@
 }
 
 .cont-graphprofiler-rpanel-root {
-  box-sizing: border-box;
   position: absolute;
   right: 1.25rem;
   width: 12rem;
   top: 3.75rem;
   z-index: 999;
-  height: 70vh;
+  height: 24vh;
   border-radius: 4px;
   padding: 0.5rem 0.2rem;
   background: rgba(0, 0, 0, 0.6);

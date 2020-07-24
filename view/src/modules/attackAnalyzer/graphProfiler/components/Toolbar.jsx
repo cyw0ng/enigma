@@ -101,7 +101,11 @@ export default class Toolbar extends React.Component {
     return (
       <div>
         {this.state.btns.map((btn) => (
-          <IconButton disabled={btn.disabled} onClick={btn.onClickHandler}>
+          <IconButton
+            disabled={btn.disabled}
+            onClick={btn.onClickHandler}
+            key={btn.id}
+          >
             {btn.iconCallback(this.props)}
           </IconButton>
         ))}

@@ -8,14 +8,16 @@ import {
   mxConstants,
   mxGraphHandler,
 } from "mxgraph-js";
+import { withSnackbar } from "notistack";
 import Toolbar from "./components/Toolbar";
 import ContextMenu from "./components/Contextmenu";
 import RightPanel from "./components/RightPanel";
 import validation from "./utils/validation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LeftPanel from "./components/LeftPanel";
+import graphOps from "./utils/graphOps";
 
-export default class GraphProfiler extends Component {
+class GraphProfiler extends Component {
   state = {
     graphObj: null,
     isFullScreen: false,
@@ -23,6 +25,7 @@ export default class GraphProfiler extends Component {
     mxObjectIdFocused: "",
     onValidation: false,
     cellForDetailsCfg: null,
+    newFlowStartProfile: null,
   };
 
   componentDidMount() {
@@ -37,7 +40,26 @@ export default class GraphProfiler extends Component {
     } else {
       const removedEvt = evt.properties.removed[0];
       if (removedEvt != null) {
-        this.setState({ mxObjectIdFocused: removedEvt.mxObjectId });
+        if (this.state.newFlowStartProfile != null) {
+          const graph = this.state.graphObj.graph;
+          const cellStart = this.state.newFlowStartProfile;
+          const cellEnd = removedEvt;
+
+          if (graphOps.isEdgeExistBetweenCells(graph, cellStart, cellEnd)) {
+            this.props.enqueueSnackbar("Exist edge between vertex", {
+              autoHideDuration: 5000,
+            });
+          } else if (
+            graphOps.addEdgeBetweenCells(graph, cellStart, cellEnd) == null
+          ) {
+            this.props.enqueueSnackbar("Cannot add edge between vertex group", {
+              autoHideDuration: 5000,
+            });
+          }
+          this.setState({ newFlowStartProfile: null, popupProfile: null });
+        } else {
+          this.setState({ mxObjectIdFocused: removedEvt.mxObjectId });
+        }
       } else {
         this.setState({ mxObjectIdFocused: "" });
       }
@@ -119,6 +141,10 @@ export default class GraphProfiler extends Component {
     this.setState({ graphObj: this.state.graphObj });
   };
 
+  handleAddNewEdge = (startCell) => {
+    this.setState({ newFlowStartProfile: startCell });
+  };
+
   loadGraphDemo = () => {
     let graph = this.state.graphObj.graph;
     let parent = graph.getDefaultParent();
@@ -173,6 +199,7 @@ export default class GraphProfiler extends Component {
             onCloseContextmenu={this.handleCloseContextmenu}
             onVertexRename={this.handleVertexRename}
             handleCellDetails={this.handleCellDetails}
+            handleAddNewEdge={this.handleAddNewEdge}
           />
           <div className="cont-graphprofiler-toolbar-root">
             <Toolbar
@@ -209,3 +236,5 @@ export default class GraphProfiler extends Component {
     );
   }
 }
+
+export default withSnackbar(GraphProfiler);

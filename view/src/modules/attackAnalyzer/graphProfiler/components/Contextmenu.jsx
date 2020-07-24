@@ -67,11 +67,30 @@ class Contextmenu extends React.Component {
         </Typograph>
       ),
     },
+    {
+      id: "add-new-edge",
+      appearsCb: (cell) =>
+        ["vertex", "edge"].indexOf(this.getPopupType(cell)) > -1,
+      childrenCb: (cell) => (
+        <Typograph
+          className="cont-graphprofiler-ctxm-btn"
+          onClick={(evt) => this.handleAddNewEdge(evt, cell)}
+        >
+          Add new flow
+        </Typograph>
+      ),
+    },
   ];
 
   handleCellDetails = (evt, cell) => {
     this.props.handleCellDetails(cell);
   };
+
+  handleAddNewEdge = (evt, cell) => {
+    this.props.handleAddNewEdge(cell);
+    this.props.onCloseContextmenu();
+  };
+
   handleAddVertex = (evt, cell) => {
     let graph = this.props.popupProfile.graph;
     if (graph == null) {

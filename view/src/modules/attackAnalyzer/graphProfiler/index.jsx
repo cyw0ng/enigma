@@ -122,7 +122,7 @@ class GraphProfiler extends Component {
       },
       () => {
         // 7. Deploy graph ondemand
-        this.loadGraphDemo();
+        // this.loadGraphDemo();
       }
     );
   };
@@ -171,6 +171,10 @@ class GraphProfiler extends Component {
     });
   };
 
+  handleGraphSave = () => {
+    const graphJSON = graphOps.generateSaveGraphJSON(this.state.graphObj.graph);
+  };
+
   handleCellDetails = (cell) => {
     this.setState({ cellForDetailsCfg: cell, popupProfile: null });
   };
@@ -211,6 +215,7 @@ class GraphProfiler extends Component {
               graphObj={this.state.graphObj}
               onFullScreenSwitch={this.handleFullScreenSwitch}
               onGraphValidationHandler={this.handleGraphValidation}
+              onGraphSaveHandler={this.handleGraphSave}
               isFullScreen={this.state.isFullScreen}
             />
           </div>

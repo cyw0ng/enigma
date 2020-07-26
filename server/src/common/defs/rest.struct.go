@@ -4,7 +4,7 @@ package defs
  * TBD: Fixing later to populate failed types
  */
 const (
-	REST_CODE_SUCCESS = 0
+	REST_CODE_SUCCESS        = 0
 	REST_CODE_GENERIC_FAILED = 1
 )
 

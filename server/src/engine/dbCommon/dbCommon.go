@@ -38,7 +38,7 @@ func GetTablesEnumList(DBConn *sql.DB) ([]string, error) {
 	}
 
 	var table string
-	for (showResult.Next()) {
+	for showResult.Next() {
 		err = showResult.Scan(&table)
 		if err != nil {
 			return []string{}, err

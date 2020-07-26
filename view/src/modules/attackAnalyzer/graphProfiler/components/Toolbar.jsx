@@ -6,6 +6,7 @@ import SettingsBackupRestoreIcon from "@material-ui/icons/SettingsBackupRestore"
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitRoundedIcon from "@material-ui/icons/FullscreenExitRounded";
 import CheckIcon from "@material-ui/icons/Check";
+import SaveAltIcon from "@material-ui/icons/SaveAlt";
 
 export default class Toolbar extends React.Component {
   state = {
@@ -55,6 +56,12 @@ export default class Toolbar extends React.Component {
           id: "verify-graph-validation",
           iconCallback: (props) => <CheckIcon fontSize="small" />,
           onClickHandler: (event) => this.onValidationHandler(),
+          disabled: true,
+        },
+        {
+          id: "save-graph-to-backend",
+          iconCallback: (props) => <SaveAltIcon fontSize="small" />,
+          onClickHandler: (event) => this.onSaveHandler(),
           disabled: false,
         },
       ],
@@ -63,6 +70,10 @@ export default class Toolbar extends React.Component {
 
   onValidationHandler = () => {
     this.props.onGraphValidationHandler();
+  };
+
+  onSaveHandler = () => {
+    this.props.onGraphSaveHandler();
   };
 
   onZoomHandler = (status) => {

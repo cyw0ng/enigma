@@ -17,6 +17,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import LeftPanel from "./components/LeftPanel";
 import graphOps from "./utils/graphOps";
 
+/**
+ * Main class for Graph Profiler Object
+ */
 class GraphProfiler extends Component {
   state = {
     graphObj: null,
@@ -91,7 +94,9 @@ class GraphProfiler extends Component {
     mxConstants.STYLE_FILLCOLOR = "white";
     mxConstants.STYLE_FONTCOLOR = "black";
 
-    graph.getModel().addListener("change", (evt) => {
+    // 5. Add change hooked listener
+    graph.getModel().addListener("endUpdate", (evt) => {
+      graphOps.graphVerify(graph, true);
       if (this.state.popupProfile != null) {
         this.setState({ popupProfile: null });
       }
@@ -107,7 +112,7 @@ class GraphProfiler extends Component {
         },
       });
 
-    // 4. mount graph & layout to object
+    // 6. mount graph & layout to object
     this.setState(
       {
         graphObj: {
@@ -116,7 +121,7 @@ class GraphProfiler extends Component {
         },
       },
       () => {
-        // 5. Deploy graph ondemand
+        // 7. Deploy graph ondemand
         this.loadGraphDemo();
       }
     );

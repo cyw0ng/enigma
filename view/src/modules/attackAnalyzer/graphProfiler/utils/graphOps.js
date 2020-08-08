@@ -169,7 +169,7 @@ const generateSaveGraphJSON = (graph) => {
     }
   });
 
-  debugger;
+  return graphJSON;
 };
 
 export default {

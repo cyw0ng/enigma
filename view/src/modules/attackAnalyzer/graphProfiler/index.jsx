@@ -16,6 +16,7 @@ import validation from "./utils/validation";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LeftPanel from "./components/LeftPanel";
 import graphOps from "./utils/graphOps";
+import md5 from "md5";
 
 /**
  * Main class for Graph Profiler Object
@@ -173,6 +174,12 @@ class GraphProfiler extends Component {
 
   handleGraphSave = () => {
     const graphJSON = graphOps.generateSaveGraphJSON(this.state.graphObj.graph);
+
+    graphJSON.projectId = this.props.projectId;
+    graphJSON.modifiedTime = new Date().valueOf();
+    graphJSON.graphDigest = md5(graphJSON.graph);
+
+    debugger;
   };
 
   handleCellDetails = (cell) => {
@@ -217,6 +224,7 @@ class GraphProfiler extends Component {
               onGraphValidationHandler={this.handleGraphValidation}
               onGraphSaveHandler={this.handleGraphSave}
               isFullScreen={this.state.isFullScreen}
+              ret2projectHandler={this.props.ret2projectHandler}
             />
           </div>
           <div className="cont-graphprofiler-rpanel-root">

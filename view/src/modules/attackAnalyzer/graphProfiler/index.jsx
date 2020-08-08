@@ -217,6 +217,7 @@ class GraphProfiler extends Component {
               onGraphValidationHandler={this.handleGraphValidation}
               onGraphSaveHandler={this.handleGraphSave}
               isFullScreen={this.state.isFullScreen}
+              ret2projectHandler={this.props.ret2projectHandler}
             />
           </div>
           <div className="cont-graphprofiler-rpanel-root">

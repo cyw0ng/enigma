@@ -17,6 +17,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import LeftPanel from "./components/LeftPanel";
 import graphOps from "./utils/graphOps";
 import md5 from "md5";
+import http from "../../../utils/rest/http";
 
 /**
  * Main class for Graph Profiler Object
@@ -173,13 +174,24 @@ class GraphProfiler extends Component {
   };
 
   handleGraphSave = () => {
-    const graphJSON = graphOps.generateSaveGraphJSON(this.state.graphObj.graph);
+    const graphObj = graphOps.generateSaveGraphJSON(this.state.graphObj.graph);
 
-    graphJSON.projectId = this.props.projectId;
-    graphJSON.modifiedTime = new Date().valueOf();
-    graphJSON.graphDigest = md5(graphJSON.graph);
+    graphObj.projectId = this.props.projectId;
+    graphObj.modifiedTime = new Date().valueOf() + "";
+    graphObj.graphDigest = md5(graphObj.graph);
 
-    debugger;
+    this.updateGraphToBackend(graphObj);
+  };
+
+  updateGraphToBackend = (graphObj) => {
+    http
+      .post("/rest/v1/gprof/graph/update", graphObj)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   handleCellDetails = (cell) => {

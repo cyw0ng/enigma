@@ -6,9 +6,26 @@ import (
 	"fmt"
 )
 
-func GetProjectList(G *defs.Global) (interface{}, error) {
+func GetProjectList(G *defs.Global) ([]defs.GProfProject, error) {
+	var projectlist []defs.GProfProject
+	selectQuery := "SELECT * FROM enigma.gprofprojects;"
 
-	return nil, nil
+	selectResult, err := G.DBConn.Query(selectQuery)
+	if err != nil {
+		return projectlist, err
+	}
+
+	var project defs.GProfProject
+	var id string
+	for selectResult.Next() {
+		if err = selectResult.Scan(&id, &project.ProjectId, &project.Name, &project.CreatedTime, &project.LastModifiedTime, &project.IsReadOnly, &project.Namespace); err != nil {
+			return projectlist, err
+		}
+
+		projectlist = append(projectlist, project)
+	}
+
+	return projectlist, nil
 }
 
 func GetProjectByProjectID(DBConn *sql.DB, ID string) (defs.GProfProject, error) {

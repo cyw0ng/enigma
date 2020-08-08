@@ -1,5 +1,6 @@
 import EnigmaDebug from "../../../../utils/debug/debug";
 import { mxCodec, mxUtils } from "mxgraph-js";
+import md5 from "md5";
 
 /**
  * addEdgeBetweenCells - Add edge from cell1 to cell2
@@ -161,15 +162,18 @@ const generateSaveGraphJSON = (graph) => {
   let graphJSON = {};
   let encodedModel = new mxCodec().encode(graph.getModel());
   graphJSON.graph = mxUtils.getXml(encodedModel);
-  graphJSON.gprof = {};
+  let gprof = {};
 
   Object.values(graph.getModel().cells).forEach((cell) => {
     if (cell.gprof) {
-      graphJSON.gprof[cell.id] = cell.gprof;
+      gprof[cell.id] = cell.gprof;
     }
   });
 
-  debugger;
+  graphJSON.gprof = JSON.stringify(gprof);
+  graphJSON.gprofDigest = md5(graphJSON.gprof);
+
+  return graphJSON;
 };
 
 export default {

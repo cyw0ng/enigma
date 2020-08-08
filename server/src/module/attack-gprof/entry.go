@@ -24,6 +24,7 @@ func RegAttackGProf(GStub *defs.Global) error {
 	}
 
 	G.Echo.GET(REST_GET_PROJECT_LIST, getProjectListHandler)
+	G.Echo.POST(REST_POST_GRAPH_UPDATE, postGraphUpdateHandler)
 
 	return nil
 }

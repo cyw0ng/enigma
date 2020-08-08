@@ -7,6 +7,7 @@ import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitRoundedIcon from "@material-ui/icons/FullscreenExitRounded";
 import CheckIcon from "@material-ui/icons/Check";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
+import FlipCameraAndroidIcon from "@material-ui/icons/FlipCameraAndroid";
 
 export default class Toolbar extends React.Component {
   state = {
@@ -62,6 +63,12 @@ export default class Toolbar extends React.Component {
           id: "save-graph-to-backend",
           iconCallback: (props) => <SaveAltIcon fontSize="small" />,
           onClickHandler: (event) => this.onSaveHandler(),
+          disabled: false,
+        },
+        {
+          id: "return-to-project-interface",
+          iconCallback: (props) => <FlipCameraAndroidIcon fontSize="small" />,
+          onClickHandler: (event) => this.props.ret2projectHandler(),
           disabled: false,
         },
       ],

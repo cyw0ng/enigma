@@ -27,6 +27,7 @@
 - [v0.1.2](https://github.com/cyw0ng/enigma/milestone/3) (branch: __dev/0.1.2/*__)
     - attack-gprof
         - 完成部分前端 Edge/Vertex 逻辑
+        - 完成部分 graph/project 存取逻辑
 
 - [v0.1.3](https://github.com/cyw0ng/enigma/milestone/4)
 - [v0.2.0](https://github.com/cyw0ng/enigma/milestone/5)
